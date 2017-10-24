@@ -12,6 +12,11 @@ export default {
         borderBottomWidth: 0
     },
 
+    backBtnIcon: {
+        width: 25,
+        height: 25
+    },
+
     image: {
         width: width,
         height: 230,
@@ -21,9 +26,16 @@ export default {
         zIndex: 0
     },
 
-    discountContainer: {
+    content: {
+        backgroundColor: '#fff',
+        marginTop: 166,
+        paddingLeft: 0,
+        paddingRight: 0
+    },
+
+    disccountContainer: {
         position: 'absolute',
-        top: (230 - 56)/ 2,
+        top: (230 - 56) / 2,
         left: 0,
         width: 70,
         height: 56,
@@ -32,22 +44,16 @@ export default {
         justifyContent: 'center'
     },
 
-    discountPercent: {
+    disccountPercent: {
         fontSize: 20,
-        fontFamily: 'Roboto',
-        fontWeight: 'bold',
-        color: 'white'
+        fontFamily: 'SanFranciscoText-Bold',
+        color: '#fff'
     },
 
-    discountText: {
+    disccountText: {
         fontSize: 14,
-        fontFamily: 'Roboto',
-        fontWeight: 'medium',
-        color: 'white'
-    },
-
-    headerIcon: {
-        color: 'white'
+        fontFamily: 'SanFranciscoText-Medium',
+        color: '#fff'
     },
 
     saveBtn: {
@@ -61,11 +67,11 @@ export default {
         width: 44,
         height: 44,
         borderRadius: 22,
-        backgroundColor: 'white',
+        backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
         zIndex: 5,
-        shadowColor: 'black',
+        shadowColor: '#000',
         shadowOffset: {width: 0, height: 2},
         shadowOpacity: 0.24,
         shadowRadius: 2
@@ -87,52 +93,42 @@ export default {
         width: 44,
         height: 44,
         borderRadius: 22,
-        backgroundColor: 'white',
+        backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
         zIndex: 5,
-        shadowColor: 'black',
+        shadowColor: '#000',
         shadowOffset: {width: 0, height: 2},
         shadowOpacity: 0.24,
         shadowRadius: 2
     },
 
     shareBtnIcon: {
-        width: 24,
-        height: 27
+        width: 25,
+        height: 25
     },
 
-    content: {
-        backgroundColor: 'white',
-        marginTop: 170,
-        paddingLeft: 0,
-        paddingRight: 0
-    },
-
-    headingText: {
-        marginTop: 42,
-        fontFamily: 'Roboto',
-        fontWeight: 'bold',
+    title: {
+        marginTop: 38,
+        fontFamily: 'SanFranciscoText-Bold',
         fontSize: 28,
-        color: 'black',
-        marginLeft: 16,
-        marginRight: 16
+        color: '#000',
+        marginLeft: 20,
+        marginRight: 20
     },
 
-    timeText: {
-        fontFamily: 'Roboto',
-        fontWeight: 'normal',
-        fontSize: 16,
-        color: '#e636a6',
+    estimateTimeText: {
+        fontSize: 17,
+        fontFamily: 'SanFranciscoText-Regular',
+        marginLeft: 20,
         marginTop: 8,
-        marginLeft: 16,
-        marginRight: 16
+        color: 'rgb(230,54,166)'
     },
 
     list: {
-        marginTop: 32,
-        marginLeft: 16,
-        marginRight: 16,
+        marginTop: 24,
+        marginLeft: 20,
+        marginRight: 20,
         borderTopWidth: 1,
         borderTopColor: 'rgb(221,221,225)'
     },
@@ -140,111 +136,92 @@ export default {
     listItem: {
         marginLeft: 0,
         borderBottomWidth: 1,
-        borderBottomColor: 'rgb(221,221,255)',
-        paddingTop: 0,
-        paddingBottom: 0,
-        paddingRight: 0
+        borderBottomColor: 'rgb(221,221,225)'
     },
 
-    priceText1: {
+    originPrice: {
         fontSize: 28,
-        fontFamily: 'Roboto',
-        fontWeight: 'light',
-        color: '#9d9da8',
-        textDecorationLine: 'line-through',
-        marginTop: 12,
-        marginBottom: 12
+        fontFamily: 'SanFranciscoText-Regular',
+        color: 'rgb(155,155,168)',
+        textDecorationLine: 'line-through'
     },
 
-    priceText2: {
+    currentPrice: {
         fontSize: 28,
-        fontFamily: 'Roboto',
-        fontWeight: 'bold',
-        color: 'black',
+        fontFamily: 'SanFranciscoText-Bold',
+        color: '#000'
+    },
+
+    aboutText: {
+        marginTop: 6,
+        fontSize: 17,
+        fontFamily: 'SanFranciscoText-Bold',
+        color: '#000'
+    },
+
+    aboutDescText: {
         marginTop: 12,
-        marginBottom: 12
+        fontSize: 17,
+        fontFamily: 'SanFranciscoText-Regular',
+        lineHeight: 24,
+        color: '#000',
+        marginBottom: 6
     },
 
-    aboutTitle: {
-        fontFamily: 'Roboto',
-        fontWeight: 'bold',
-        fontSize: 16,
-        color: 'black',
-        marginTop: 16,
-        marginLeft: 0,
-        marginRight: 0
-    },
-
-    aboutDesc: {
-        fontWeight: 'normal',
-        fontFamily: 'Roboto',
-        fontSize: 16,
-        marginLeft: 0,
-        marginRight: 0,
-        marginTop: 16,
-        marginBottom: 16
+    moreBtn: {
+        fontSize: 17,
+        fontFamily: 'SanFranciscoText-Regular',
+        lineHeight: 24,
+        color: 'rgb(253,152,71)'
     },
 
     btnText: {
-        fontFamily: 'Roboto',
-        fontWeight: 'normal',
-        fontSize: 16,
-        color: 'black',
-        paddingTop: 19,
-        paddingBottom: 18,
-        paddingLeft: 0,
-        marginLeft: 0
+        fontSize: 20,
+        fontFamily: 'SanFranciscoText-Regular',
+        color: '#000'
     },
 
     locationText: {
-        fontFamily: 'Roboto',
-        fontWeight: 'normal',
-        fontSize: 16,
-        color: '#e636a6',
-        paddingLeft: 0,
-        paddingRight: 0,
-        paddingTop: 32,
-        paddingBottom: 12,
-        marginLeft: 0
+        fontSize: 17,
+        fontFamily: 'SanFranciscoText-Regular',
+        color: 'rgb(230,54,166)'
     },
 
     pinIcon: {
-        color: '#e636a6',
+        color: 'rgb(230,54,166)',
         fontSize: 20
-    },
-
-    footer: {
-        height: 80,
-        backgroundColor: 'white',
-        paddingTop: 16,
-        paddingBottom: 16,
-        paddingLeft: 24,
-        paddingRight: 24,
-        shadowColor: 'black',
-        shadowOffset: {x: 0, y: -1},
-        shadowOpacity: 0.14,
-        shadowRadius: 4
-    },
-
-    bookBtn: {
-        height: 48,
-        borderRadius: 100,
-        backgroundColor: '#e636a6',
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: width - 32
-    },
-
-    bookBtnText: {
-        fontFamily: 'Roboto',
-        fontWeight: 'medium',
-        fontSize: 18,
-        color: 'white'
     },
 
     mapview: {
         width: width,
         height: 300,
         marginBottom: 0
+    },
+
+    footer: {
+        height: 80,
+        backgroundColor: '#fff',
+        paddingTop: 12,
+        paddingBottom: 11,
+        paddingLeft: 48,
+        paddingRight: 48,
+        shadowOffset: {x: 0, y: -1},
+        shadowColor: 'black',
+        shadowOpacity: 0.3,
+        shadowRadius: 4
+    },
+
+    reserveBtn: {
+        height: 57,
+        borderRadius: 100,
+        backgroundColor: 'rgb(230,54,166)',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: (width - 96)
+    },
+
+    reserveBtnText: {
+        fontFamily: 'SanFranciscoText-Medium',
+        fontSize: 20
     }
 }

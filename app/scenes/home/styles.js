@@ -1,5 +1,5 @@
 import { Dimensions } from 'react-native';
-const { width, height } = Dimensions.get('window');
+const { width, height }  = Dimensions.get('window');
 import { Colors } from '../../constants';
 
 export default {
@@ -11,18 +11,17 @@ export default {
         backgroundColor: 'transparent',
         paddingLeft: 0,
         paddingRight: 0,
-        height: 112        
+        height: 142
     },
 
     searchbarContainer: {
-        marginTop: 8,
+        marginTop: 28,
         marginLeft: 8,
         marginRight: 8,
         width: (width - 16),
-        height: 48,
+        height: 50,
         backgroundColor: 'rgb(40,51,106)',
-        flexDirection: 'row',
-        borderRadius: 2
+        flexDirection: 'row'
     },
 
     searchIconContainer: {
@@ -38,30 +37,27 @@ export default {
     },
 
     searchInput: {
-        height: 48,
+        height: 50,
         paddingLeft: 0,
         color: '#fff',
-        fontFamily: 'Roboto',
-        fontSize: 16,
-        fontWeight: 'normal'
+        fontFamily: 'SanFranciscoText-Regular',
+        fontSize: 17
     },
 
     tabContainer: {
-        marginTop: 8
+        marginTop: 3
     },
 
     tabItem: {
         width: (width / 3),
-        height: 48,
+        height: 46,
         alignItems: 'center',
         justifyContent: 'center',
         paddingTop: 0,
         paddingBottom: 0,
         paddingLeft: 0,
         paddingRight: 0,
-        borderRadius: 0,
-        borderBottomWidth: 4,
-        borderBottomColor: Colors.main
+        borderRadius: 0
     },
 
     tabActiveItem: {
@@ -71,40 +67,66 @@ export default {
 
     tabItemText: {
         fontSize: 14,
-        fontFamily: 'Roboto',
-        fontWeight: 'medium',
-        color: 'rgba(255,255,255,0.5)',
-        letterSpacing: 0.5
+        fontFamily: 'SanFranciscoText-Medium',
+        color: 'rgba(255,255,255,0.65)'
     },
 
     tabItemActiveText: {
         fontSize: 14,
-        fontFamily: 'Roboto',
-        fontWeight: 'medium',
+        fontFamily: 'SanFranciscoText-Medium',
         color: '#fff'
     },
 
     content: {
         backgroundColor: 'white',
+        paddingLeft: 20,
+        paddingRight: 20,
         paddingTop: 4
     },
 
     listItem: {
-        marginLeft: 16,
+        marginLeft: 0,
         borderBottomWidth: 0,
-        marginTop: 16,
+        marginTop: 20,
         paddingTop: 0,
         paddingBottom: 0,
-        paddingRight: 16
+        paddingRight: 0
     },
 
     itemImage: {
-        width: width - 32,
+        width: (width - 40),
         height: 200,
         position: 'relative'
     },
 
-    discountContainer: {
+    itemPriceContainer: {
+        marginTop: 16,
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+
+    itemPriceText1: {
+        fontFamily: 'SanFranciscoText-Bold',
+        fontSize: 22,
+        color: '#000'
+    },
+
+    itemDiscount: {
+        fontSize: 18,
+        fontFamily: 'SanFranciscoText-Regular',
+        color: 'rgb(155,155,168)',
+        textDecorationLine: 'line-through'
+    },
+
+    itemEstimatedTime: {
+        marginTop: 8,
+        marginLeft: 0,
+        fontSize: 17,
+        fontFamily: 'SanFranciscoText-Regular',
+        color: 'rgb(230,54,166)'
+    },
+
+    disccountContainer: {
         position: 'absolute',
         top: 0,
         left: 0,
@@ -115,17 +137,15 @@ export default {
         justifyContent: 'center'
     },
 
-    discountPercent: {
+    disccountPercent: {
         fontSize: 20,
-        fontFamily: 'Roboto',
-        fontWeight: 'bold',
+        fontFamily: 'SanFranciscoText-Bold',
         color: '#fff'
     },
 
-    discountText: {
+    disccountText: {
         fontSize: 14,
-        fontFamily: 'Roboto',
-        fontWeight: 'medium',
+        fontFamily: 'SanFranciscoText-Medium',
         color: '#fff'
     },
 
@@ -144,36 +164,5 @@ export default {
     saveBtnIcon: {
         width: 25,
         height: 25
-    },
-
-    itemPriceContainer: {
-        marginTop: 16,
-        flexDirection: 'row',
-        justifyContent: 'space-between'
-    },
-
-    itemPriceText1: {
-        fontFamily: 'Roboto',
-        fontWeight: 'bold',
-        fontSize: 22,
-        color: '#000'
-    },
-
-    itemPriceText2: {
-        fontSize: 18,
-        fontFamily: 'Roboto',
-        fontWeight: 'normal',
-        color: 'rgb(155,155,168)',
-        textDecorationLine: 'line-through',
-        paddingRight: 28
-    },
-
-    itemTimeText: {
-        marginTop: 8,
-        marginLeft: 0,
-        fontSize: 16,
-        fontFamily: 'Roboto',
-        fontWeight: 'normal',
-        color: 'rgb(230,54,166)'
     }
 }

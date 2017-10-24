@@ -12,6 +12,11 @@ export default {
         borderBottomWidth: 0
     },
 
+    backBtnIcon: {
+        width: 25,
+        height: 25
+    },
+
     image: {
         width: width,
         height: 230,
@@ -21,53 +26,45 @@ export default {
         zIndex: 0
     },
 
-    headerIcon: {
-        color: 'white'
-    },
-
     content: {
-        backgroundColor: 'white',
-        marginTop: 170,
-        paddingLeft: 16,
-        paddingRight: 16,
-        paddingTop: 20
+        marginTop: 166,
+        backgroundColor: '#fff',
+        paddingTop: 16,
+        paddingLeft: 20,
+        paddingRight: 20
     },
 
-    title: {
-        fontFamily: 'Roboto',
-        fontWeight: 'bold',
+    nameText: {
         fontSize: 28,
-        color: 'black'
-    },
-
-    pinIcon: {
-        color: '#9b9ba8',
-        fontSize: 20
+        fontFamily: 'SanFranciscoText-Bold',
+        color: '#000'
     },
 
     locationText: {
-        color: '#9b9ba8',
-        fontSize: 16,
-        fontFamily: 'Roboto',
-        fontWeight: 'normal',
-        marginTop: 8
+        marginTop: 8,
+        fontSize: 17,
+        fontFamily: 'SanFranciscoText-Regular',
+        color: 'rgb(155,155,168)'
+    },
+
+    pinIcon: {
+        fontSize: 20,
+        color: 'rgb(155,155,168)'
     },
 
     dateText: {
-        marginTop: 16,
-        fontSize: 16,
-        fontFamily: 'Roboto',
-        fontWeight: 'normal',
-        color: 'black'
+        color: '#000',
+        fontFamily: 'SanFranciscoText-Regular',
+        fontSize: 17,
+        marginTop: 16
     },
 
     timeText: {
-        marginTop: 8,
-        fontSize: 16,
-        fontFamily: 'Roboto',
-        fontWeight: 'normal',
-        color: '#e636a6',
-        marginBottom: 16
+        fontFamily: 'SanFranciscoText-Regular',
+        fontSize:  17,
+        marginTop: 6,
+        color: 'rgb(230,54,166)',
+        marginBottom: 24
     },
 
     divider: {
@@ -77,9 +74,8 @@ export default {
 
     qrText: {
         marginTop: 24,
-        fontFamily: 'Roboto',
-        fontWeight: 'bold',
-        fontSize: 16,
+        fontFamily: 'SanFranciscoText-Bold',
+        fontSize: 17,
         color: '#000',
         marginBottom: 16
     },
@@ -95,8 +91,7 @@ export default {
     qrCodeText: {
         marginTop: 20,
         fontSize: 18,
-        fontFamily: 'Roboto',
-        fontWeight: 'medium',
+        fontFamily: 'SanFranciscoText-Medium',
         color: '#000',
         textAlign: 'center'
     },
@@ -116,8 +111,7 @@ export default {
 
     priceText: {
         fontSize: 22,
-        fontFamily: 'Roboto',
-        fontWeight: 'bold',
+        fontFamily: 'SanFranciscoText-Bold',
         color: '#000'
     },
 
@@ -135,18 +129,22 @@ export default {
     },
 
     paidText: {
-        fontFamily: 'Roboto',
-        fontWeight: 'normal',
-        fontSize: 16,
+        fontFamily: 'SanFranciscoText-Regular',
+        fontSize: 17,
         color: '#fff'
     },
 
     descText: {
-        fontSize: 16,
+        fontSize: 17,
         color: '#000',
-        fontFamily: 'Roboto',
-        fontWeight: 'normal',
+        fontFamily: 'SanFranciscoText-Regular',
         marginBottom: 24
+    },
+
+    moreBtn: {
+        fontSize: 17,
+        color: 'rgb(253,152,71)',
+        fontFamily: 'SanFranciscoText-Regular'
     },
 
     cancelBtn: {
@@ -154,20 +152,18 @@ export default {
         marginBottom: 16,
         marginLeft: 27,
         marginRight: 27,
-        height: 48,
+        height: 57,
         borderColor: '#000',
         borderWidth: 1,
         borderRadius: 100,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: 'transparent',
-        elevation: 0
+        backgroundColor: 'transparent'
     },
 
     cancelBtnText: {
-        fontSize: 18,
-        fontFamily: 'Roboto',
-        fontWeight: 'medium',
+        fontSize: 20,
+        fontFamily: 'SanFranciscoText-Regular',
         color: '#000'
     }
 }

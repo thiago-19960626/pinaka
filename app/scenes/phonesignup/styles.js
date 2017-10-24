@@ -1,5 +1,5 @@
 import { Dimensions } from 'react-native';
-const { width, height } = Dimensions.get('window');
+const { width, height }  = Dimensions.get('window');
 import { Colors } from '../../constants';
 
 export default {
@@ -9,238 +9,215 @@ export default {
 
     header: {
         backgroundColor: 'transparent',
-        elevation: 0
+        borderBottomWidth: 0
     },
 
-    headerIcon: {
-        color: 'white'
+    backBtnIcon: {
+        width: 25,
+        height: 25
     },
 
-    headerBtnText: {
-        color: 'white',
-        fontFamily: 'Roboto',
-        fontWeight: 'normal'
+    signupBtnText: {
+        fontSize: 17,
+        color: '#fff',
+        fontFamily: 'SanFranciscoText-Regular'
     },
 
-    title: {
-        color: 'white',
-        fontFamily: 'Roboto',
-        fontWeight: 'medium',
-        fontSize: 20,
-        lineHeight: 28
+    content: {
+        
     },
 
     progressContainer: {
+        height: 4,
         width: width,
-        height: 2,
-        backgroundColor: '#0b1448'
+        backgroundColor: 'rgb(11,20,72)'
     },
 
     progress: {
-        height: 2,
-        backgroundColor: '#3ddcd1'
+        height: 4,
+        backgroundColor: 'rgb(61,220,209)'
     },
 
-    text: {
-        fontFamily: 'Roboto',
-        fontWeight: 'medium',
-        fontSize: 18,
-        color: 'white',
-        textAlign: 'center',
-        marginTop: 20
+    blockContainer: {
+        paddingLeft: 32,
+        paddingRight: 32
     },
 
-    formContainer: {
-        marginTop: 32,
-        marginLeft: 16,
-        marginRight: 16
-    },
-
-    formItem: {
-        marginLeft: 0
-    },
-
-    formItemLabel: {
-        paddingLeft: 0,
-        paddingTop: 0,
-        paddingBottom: 0,
-        paddingRight: 0,
-        top: 0,
-        fontFamily: 'Roboto',
-        fontWeight: 'normal',
-        fontSize: 12,
-        color: 'white',
-        opacity: 0.65
-    },
-
-    formInput: {
-        height: 45,
-        paddingRight: 0,
-        fontFamily: 'Roboto',
-        fontWeight: 'normal',
-        fontSize: 16,
-        color: 'white'
-    },
-
-    text1: {
-        marginTop: 32,
-        marginLeft: 16,
-        marginRight: 16,
-        fontFamily: 'Roboto',
-        fontWeight: 'normal',
-        fontSize: 12,
-        color: 'white',
+    signupTitle: {
+        marginTop: 24,
+        fontSize: 28,
+        fontFamily: 'SanFranciscoText-Bold',
+        color: '#fff',
         textAlign: 'center'
     },
 
-    nextBtn: {
-        marginLeft: 24,
-        marginRight: 24,
-        width: width -  48,
-        height: 48,
-        backgroundColor: '#e636a6',
-        borderRadius: 100,
-        alignItems: 'center',
-        justifyContent: 'center',
-        paddingLeft: 0,
-        paddingRight: 0,
-        paddingTop: 0,
-        paddingBottom: 0,
+    descText: {
+        marginTop: 8,
+        fontSize: 17,
+        fontFamily: 'SanFranciscoText-Regular',
+        color: '#fff',
+        textAlign: 'center'
+    },
+
+    form: {
         marginTop: 32
     },
 
+    formItem: {
+        marginLeft: 0,
+        marginBottom: 16,
+        borderBottomWidth: 1,
+        borderBottomColor: 'rgba(255,255,255,0.5)',
+        position: 'relative',
+        alignItems: 'flex-start'
+    },
+
+    formLabel: {
+        paddingTop: 0,
+        marginBottom: 8,
+        fontSize: 14,
+        fontFamily: 'SanFranciscoText-Regular',
+        color: '#fff'
+    },
+
+    formInput: {
+        height: 48,
+        color: '#fff',
+        fontFamily: 'SanFranciscoText-Regular'
+    },
+
+    phoneText1: {
+        marginTop: 16,
+        fontSize: 13,
+        fontFamily: 'SanFranciscoText-Regular',
+        textAlign: 'center',
+        color: '#fff'
+    },
+
+    moreBtn: {
+        fontSize: 13,
+        color: 'rgb(253,152,71)',
+        fontFamily: 'SanFranciscoText-Medium'
+    },
+
+    nextBtn: {
+        marginTop: 80,
+        marginLeft: 16,
+        marginRight: 16,
+        backgroundColor: 'rgb(230,54,166)',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 100,
+        paddingTop: 0,
+        paddingBottom: 0,
+        paddingLeft: 0,
+        paddingRight: 0,
+        height: 57
+    },
+
     nextBtnText: {
-        fontFamily: 'Roboto',
-        fontWeight: 'medium',
-        fontSize: 18,
-        color: 'white'
+        fontSize: 20,
+        fontFamily: 'SanFranciscoText-Medium',
+        color: '#fff'
     },
 
     codeContainer: {
         marginTop: 32,
-        marginLeft: 16,
-        marginRight: 16,
         flexDirection: 'row',
+        flexWrap: 'wrap',
         justifyContent: 'space-between'
     },
 
-    codeItemContainer: {
-        width: 40,
-        height: 48
-    },
-
-    codeItemInput: {
+    codeItem: {
         width: 40,
         height: 48,
-        fontFamily: 'Roboto',
-        fontWeight: 'light',
-        fontSize: 28,
+        backgroundColor: 'rgb(11,20,72)',
+        
         textAlign: 'center',
-        color: 'white',
-        backgroundColor: '#0b1448',
-        paddingLeft: 0,
-        paddingRight: 0
+        fontSize: 28,
+        color: '#fff',
+        fontFamily: 'SanFranciscoText-Regular'
     },
 
     sendBtnText: {
-        fontFamily: 'Roboto',
-        fontWeight: 'normal',
-        fontSize: 14,
-        color: '#ffa958',
+        marginTop: 20,
         textAlign: 'center',
-        marginTop: 32
+        color: 'rgb(255,169,88)',
+        fontFamily: 'SanFranciscoText-Regular',
+        fontSize: 15
     },
 
-    descText: {
-        fontFamily: 'Roboto',
-        fontWeight: 'normal',
-        fontSize: 12,
-        color: 'white',
-        marginLeft: 16,
-        marginRight: 16,
+    sendDescText: {
         marginTop: 32,
-        textAlign: 'center'
+        textAlign: 'center',
+        color: '#fff',
+        fontSize: 13,
+        fontFamily: 'SanFranciscoText-Regular',
+        paddingLeft: 5,
+        paddingRight: 5
     },
 
-    linkText: {
-        fontFamily: 'Roboto',
-        fontWeight: 'medium',
-        color: '#fd9847',
-        fontSize: 12
+    termBtnText: {
+        color: 'rgb(253,152,71)',
+        fontFamily: 'SanFranciscoText-Medium',
+        fontSize: 13
     },
 
-    gridFormContainer: {
-        marginTop: 17
+    birthdayInputContainer: {
+        marginRight: 9
     },
 
-    birthdayContainer: {
-        marginRight: 8
+    zipcodeInputContainer: {
+        marginLeft: 9
     },
 
-    zipcodeContainer: {
-        marginLeft: 8
+    listForm: {
+        marginTop: 22
     },
 
-    birthdayText: {
-        height: 45,
-        width: (width - 48)/2,
-        alignItems: 'flex-start',
-        justifyContent: 'center',
-        borderWidth: 0
-    },
-
-    birthdayWrapper: {
-        width: (width - 48)/2,
-        height: 45
-    },
-
-    additionalContainer: {
-        marginLeft: 16,
-        marginRight: 16,
-        marginTop: 32
-    },
-
-    additionalItem: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        marginBottom: 20
-    },
-
-    additionalItemText: {
-        fontFamily: 'Roboto',
-        fontWeight: 'normal',
-        fontSize: 14,
-        color: 'white'
-    },
-
-    additionBtnContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        width: 100
-    },
-
-    additionalBtn: {
-        width: 40,
-        height: 40,
-        paddingLeft: 0,
+    listFormItem: {
+        marginLeft: 0,
         paddingRight: 0,
-        paddingTop: 0,
-        paddingBottom: 0
+        borderBottomWidth: 0,
+        paddingTop: 10,
+        paddingBottom: 10
     },
 
-    additionalBtnIcon: {
+    listFormItemText: {
+        fontSize: 14,
+        fontFamily: 'SanFranciscoText-Regular',
+        color: '#fff',
+        marginLeft: 0
+    },
+
+    manIcon: {
         width: 40,
         height: 40
     },
 
-    showText: {
+    rightBtn: {
+        width: 40,
+        height: 40,
+        paddingTop: 0,
+        paddingBottom: 0,
+        paddingLeft: 0,
+        paddingRight: 0
+    },
+
+    passwordDescText: {
+       marginTop: 8,
+       fontSize: 17,
+       fontFamily: 'SanFranciscoText-Regular' ,
+       textAlign: 'center',
+       color: '#fff'
+    },
+
+    passwordShowBtn: {
+        fontSize: 14,
+        color: 'rgb(255,169,88)',
+        fontFamily: 'SanFranciscoText-Regular',
         position: 'absolute',
         top: 0,
-        right: 0,
-        fontFamily: 'Roboto',
-        fontWeight: 'normal',
-        fontSize: 14,
-        color: '#ffa958'
+        right: 0
     }
 }

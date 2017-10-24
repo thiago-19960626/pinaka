@@ -1,40 +1,26 @@
 import { Dimensions } from 'react-native';
-const { width, height } = Dimensions.get('window');
+const { width, height }  = Dimensions.get('window');
 import { Colors } from '../../constants';
 
 export default {
     container: {
-        backgroundColor: Colors.main
+        backgroundColor: '#fff',
     },
 
     header: {
         backgroundColor: 'transparent',
-        elevation: 0
+        borderBottomWidth: 0
     },
 
-    headerIcon: {
-        color: 'white'
-    },
-
-    headerBtnText: {
-        color: 'white',
-        fontFamily: 'Roboto',
-        fontWeight: 'normal'
-    },
-
-    title: {
-        color: 'white',
-        fontFamily: 'Roboto',
-        fontWeight: 'medium',
-        fontSize: 20,
-        lineHeight: 28
+    backBtnIcon: {
+        width: 25,
+        height: 25
     },
 
     content: {
-        backgroundColor: 'white',
-        paddingTop: 20,
-        paddingLeft: 16,
-        paddingRight: 16
+        paddingLeft: 20,
+        paddingRight: 20,
+        paddingTop: 24
     },
 
     basicContainer: {
@@ -52,49 +38,43 @@ export default {
 
     nameText: {
         fontSize: 22,
-        fontFamily: 'Roboto',
-        fontWeight: 'bold',
-        color: 'black'
+        fontFamily: 'SanFranciscoText-Bold',
+        color: '#000'
     },
 
     locationText: {
         fontSize: 14,
-        fontFamily: 'Roboto',
-        fontWeight: 'normal',
-        color: '#9b9ba8',
+        fontFamily: 'SanFranciscoText-Regular',
+        color: 'rgb(155,155,168)',
         marginTop: 8
     },
 
     phoneText: {
-        fontFamily: 'Roboto',
-        fontWeight: 'normal',
-        fpntSize: 14,
-        color: '#e636a6',
+        fontSize: 14,
+        fontFamily: 'SanFranciscoText-Regular',
+        color: 'rgb(230,54,166)',
         marginTop: 8
     },
 
     datetimeText: {
-        marginTop: 17,
-        fontFamily: 'Roboto',
-        fontWeight: 'bold',
-        fontSize: 16,
-        color: 'black'
+        marginTop: 21,
+        fontSize: 17,
+        fontFamily: 'SanFranciscoText-Bold',
+        color: '#000'
     },
 
     dateText: {
-        fontFamily: 'Roboto',
-        fontWeight: 'normal',
-        fontSize: 16,
-        color: 'black',
-        marginTop: 12
+        marginTop: 12,
+        fontSize: 17,
+        fontFamily: 'SanFranciscoText-Regular',
+        color: '#000'
     },
 
     timeText: {
-        fontFamily: 'Roboto',
-        fontWeight: 'normal',
-        fontSize: 16,
-        color: '#e636a6',
-        marginTop: 8
+        marginTop: 6,
+        fontSize: 17,
+        fontFamily: 'SanFranciscoText-Regular',
+        color: 'rgb(230,54,166)'
     },
 
     list: {
@@ -105,20 +85,15 @@ export default {
 
     listItem: {
         marginLeft: 0,
-        marginRight: 0,
-        borderBottomWidth: 1,
-        borderBottomColor: 'rgb(221,221,225)',
         paddingRight: 0,
-        paddingTop: 12,
-        paddingBottom: 12
+        borderBottomWidth: 1,
+        borderBottomColor: 'rgb(221,221,225)'
     },
 
     listItemText: {
-        fontSize: 16,
-        fontFamily: 'Roboto',
-        fontWeight: 'normal',
-        color: 'black',
-        marginLeft: 0
+        fontSize: 20,
+        fontFamily: 'SanFranciscoText-Regular',
+        color: '#000'
     },
 
     right: {
@@ -136,14 +111,20 @@ export default {
     },
 
     countText: {
-        fontSize: 16,
-        fontFamily: 'Roboto',
-        fontWeight: 'normal',
-        color: 'white'
+        fontSize: 17,
+        fontFamily: 'SanFranciscoText-Regular',
+        color: '#fff'
+    },
+
+    paymentText: {
+        marginTop: 24,
+        fontSize: 17,
+        fontFamily: 'SanFranciscoText-Bold',
+        color: '#000'
     },
 
     listItemIcon: {
-        color: 'rgb(155,155, 168)',
+        color: 'rgb(155, 155, 168)',
         marginLeft: 0,
         marginRight: 0
     },
@@ -151,7 +132,7 @@ export default {
     paymentIcon: {
         width: 32,
         height: 22,
-        mrginRight: 16
+        marginRight: 16
     },
 
     paymentListItemBody: {
@@ -165,67 +146,55 @@ export default {
         lineHeight: 34
     },
 
-    paymentText: {
-        fontFamily: 'Roboto',
-        fontWeight: 'normal',
-        fontSize: 16,
-        color: 'black'
-    },
-
     addPaymentIcon: {
-        color: '#e636a6',
+        color: 'rgb(230,54,166)',
         fontSize: 25
     },
 
     addPaymentText: {
-        color: '#e636a6',
+        color: 'rgb(230,54,166)',
         fontSize: 17,
-        fontFamily: 'Roboto',
-        fontWeight: 'normal'
+        fontFamily: 'SanFranciscoText-Regular'
     },
 
     footer: {
         height: 80,
-        backgroundColor: 'white',
-        paddingTop: 16,
-        paddingBottom: 16,
-        paddingLeft: 16,
-        paddingRight: 16,
+        backgroundColor: '#fff',
         shadowOffset: {x: 0, y: -1},
-        shadowColor: 'black',
-        shadowRadius: 4,
+        shadowColor: '#000',
         shadowOpacity: 0.14,
-        justifyContent: 'space-between'
+        shadowRadius: 4,
+        justifyContent: 'space-between',
+        paddingLeft: 20,
+        paddingRight: 20,
+        paddingTop: 12,
+        paddingBottom: 12
     },
 
     payBtn: {
         width: 156,
-        height: 48,
-        backgroundColor: '#e636a6',
+        height: 57,
+        backgroundColor: 'rgb(230,54,166)',
         borderRadius: 100,
         alignItems: 'center',
         justifyContent: 'center'
     },
 
     payBtnText: {
-        fontSize: 18,
-        fontFamily: 'Roboto',
-        fontWeight: 'normal',
-        color: 'white'
+        fontSize: 20,
+        color: '#fff',
+        fontFamily: 'SanFranciscoText-Medium'
     },
 
     footerPriceText: {
         fontSize: 22,
-        color: 'black',
-        fontFamily: 'Roboto',
-        fontWeight: 'bold'
+        color: '#000',
+        fontFamily: 'SanFranciscoText-Bold'
     },
 
     footerLineText: {
-        fontSize: 16,
-        fontFamily: 'Roboto',
-        fontWeight: 'normal',
-        color: 'black',
-        marginTop: 4
+        fontSize: 17,
+        color: '#000',
+        fontFamily: 'SanFranciscoText-Regular'
     }
 }

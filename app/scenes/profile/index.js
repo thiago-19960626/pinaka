@@ -3,31 +3,29 @@ import { connect } from 'react-redux';
 import {
     Container,
     Content,
-    Body,
-    Button,
-    Title,
-    Thumbnail,
     Header,
-    Label,
+    Title,
+    Body,
+    Thumbnail,
     Text,
+    View,
     List,
     ListItem,
-    View,
-    Grid,
-    Col,
     Right,
-    Icon
+    Icon,
+    Left,
+    Button
 } from 'native-base';
 import { NavigationActions } from 'react-navigation';
 import styles from './styles';
-import { StatusBar,RefreshControl } from 'react-native';
+import { StatusBar, RefreshControl } from 'react-native';
 import { API } from '../../constants/api';
 import { getProfile } from '../../actions';
 
 class ProfileScreen extends Component{
     static navigationOptions = {
         header: null
-    }
+    };
 
     constructor(props){
         super(props);
@@ -59,6 +57,16 @@ class ProfileScreen extends Component{
             refreshing: true
         });
         this.loadProfile();
+    }
+
+    onPaymentMethod(){
+        var { dispatch } = this.props;
+        dispatch(NavigationActions.navigate({routeName: 'PaymentMethod'}));
+    }
+
+    onEdit(){
+        var { dispatch } = this.props;
+        dispatch(NavigationActions.navigate({routeName: 'EditProfile'}));
     }
 
     showAge(){
@@ -94,31 +102,28 @@ class ProfileScreen extends Component{
         return "";
     }
 
-    onEdit(){
-        var { dispatch } = this.props;
-        dispatch(NavigationActions.navigate({routeName: 'editprofile'}))
-    }
-
-    onList(){
-        var { dispatch } = this.props;
-        dispatch(NavigationActions.navigate({routeName: 'creditcardlist'}));
-    }
-
     render(){
         StatusBar.setBarStyle('light-content');
         return (
             <Container style={styles.container}>
                 <Header style={styles.header}>
+                    <Left>
+                        <Button transparent>
+                            <Text></Text>
+                        </Button>
+                    </Left>
                     <Body>
-                        <Title style={styles.title}>Profile</Title>
+                        <Title style={styles.headerTitle}>Profile</Title>
                     </Body>
                     <Right>
                         <Button transparent onPress={() => this.onEdit()}>
-                            <Icon name="md-create" style={styles.headerIcon}/>
+                            <Text style={styles.editBtnText}>Edit</Text>
                         </Button>
                     </Right>
                 </Header>
-                <Content style={styles.content}
+                {this.props.user?
+                <Content 
+                    style={styles.content}
                     refreshControl={
                         <RefreshControl
                             refreshing={this.state.refreshing}
@@ -126,39 +131,34 @@ class ProfileScreen extends Component{
                         />
                     }>
                     <Body>
-                        <Thumbnail source={require('../../assets/1.png')} style={styles.image}/>
+                        <Thumbnail source={require('../../assets/home/1.png')} style={styles.image}/>
                         <Text style={styles.basicText}>{this.props.user.name}, {this.showAge()}</Text>
-                        <Text style={styles.locationText}>Berlin, Germany</Text>
+                        <Text style={styles.locationText}>Berlin, Germany</Text>                        
                     </Body>
                     {this.showInterest().length > 0?
-                    <Text style={styles.interestText}>
-                        My interest
-                    </Text>: null}
+                    <Text style={styles.interestText}>My interests</Text>: null}
                     {this.showInterest().length > 0?
                     <Text style={styles.interestText1}>
                         {this.showInterest()}
-                    </Text>: null}
-                    <View style={styles.divider}/>
-                    <Text style={styles.verifyText}>
-                        Verified Info
-                    </Text>
+                    </Text>: null}                    
+                    <Text style={styles.verifyText}>Verified Info</Text>
                     <Text style={styles.interestText1}>
                         {this.showVerifiedInfo()}
                     </Text>
                     <View style={styles.divider}/>
                     <List style={styles.list}>
-                        <ListItem style={styles.listItem} onPress={() => this.onList()}>
+                        <ListItem style={styles.listItem} onPress={() => this.onPaymentMethod()}>
                             <Body>
                                 <Text style={styles.listItemText}>Payment Method</Text>
                             </Body>
                             <Right>
-                                <Icon style={styles.listItemIcon} name="ios-arrow-forward"/>
+                                <Icon  style={styles.listItemIcon} name="arrow-forward"/>
                             </Right>
                         </ListItem>
                     </List>
-                </Content>
+                </Content>: null}
             </Container>
-        );
+        )
     }
 }
 

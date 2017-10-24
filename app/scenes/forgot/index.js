@@ -4,34 +4,31 @@ import {
     Container,
     Content,
     Body,
-    Title,
-    Label,
-    Thumbnail,
+    Text,
     Button,
-    Left,
-    Right,
+    Title,
+    Thumbnail,
     Header,
-    Icon,
-    Input,
-    Form,
     Item,
-    View,
-    Text
+    Label,
+    Left,
+    Form,
+    Input
 } from 'native-base';
+import {
+    Alert
+} from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import styles from './styles';
 import { StatusBar } from 'react-native';
 import EDialog from '../../components/edialog';
 import PLoading from '../../components/loading';
 import { forgot } from '../../actions';
-import {
-    Alert
-} from 'react-native';
 
 class ForgotScreen extends Component{
     static navigationOptions = {
         header: null
-    }
+    };
 
     constructor(props){
         super(props);
@@ -101,30 +98,26 @@ class ForgotScreen extends Component{
         return (
             <Container style={styles.container}>
                 <Header style={styles.header}>
-                    <Left style={styles.headerLeft}>
+                    <Left>
                         <Button transparent onPress={() => this.onBack()}>
-                            <Icon name="arrow-back" style={styles.headerIcon}/>
+                            <Thumbnail square source={require('../../assets/icNavBackBlack.png')} style={styles.backBtnIcon}/>
                         </Button>
                     </Left>
-                    <Body>
-                        <Title style={styles.title}>Forgot your password?</Title>
-                    </Body>
                 </Header>
                 {this.state.isError?
                 <EDialog errorText={this.state.errorText} onClose={() => this.onErrorClose()}/>:null}
-                <Content>
-                    <Text style={styles.text}>Enter your email to find your account.</Text>
-                    <Form style={styles.formContainer}>
-                        <Item stackedLabel style={styles.formItemContainer}>
-                            <Label style={styles.formItemLabel}>
-                                EMAIL
-                            </Label>
+                <Content style={styles.content}>
+                    <Text style={styles.loginText}>Forgot your password?</Text>
+                    <Text style={styles.descText}>Enter your email to find your account.</Text>
+                    <Form style={styles.form}>
+                        <Item stackedLabel style={styles.formItem}>
+                            <Label style={styles.formLabel}>EMAIL</Label>
                             <Input style={styles.formInput} value={this.state.email} onChangeText={(text) => this.onChangeText(text)}/>
                         </Item>
-                    </Form>
-                    <Button style={styles.sendBtn} onPress={() => this.onNext()}>
-                        <Label style={styles.sendBtnText}>Next</Label>
-                    </Button>
+                    </Form>         
+                    <Button block style={styles.nextBtn} onPress={() => this.onNext()}>
+                        <Text style={styles.nextBtnText}>Next</Text>
+                    </Button>          
                 </Content>
                 {this.state.isLoading?<PLoading color="white"/>:null}
             </Container>

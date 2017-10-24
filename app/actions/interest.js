@@ -5,7 +5,7 @@ function getInterests(){
         fetch(API.SERVER_DEV_URL + 'interest', {
             method: "GET",
             headers: {
-                'Content-Type': 'multipart/form-data'
+                'Content-Type': 'application/json'
             }
         })
         .then((res) => res.json())

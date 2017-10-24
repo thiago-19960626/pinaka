@@ -4,46 +4,47 @@ import {
     Container,
     Content,
     Body,
-    Title,
-    Label,
-    Thumbnail,
-    Button,
-    Left,
-    Header,
-    Right,
-    Icon,
-    Form,
-    Item,
-    Input,
-    View,
     Text,
+    Button,
+    Title,
+    Thumbnail,
+    Header,
+    Item,
+    Form,
+    Input,
+    Label,
+    Left,
+    Right,
+    View,
     Grid,
-    Col    
+    Col,
+    List,
+    ListItem
 } from 'native-base';
 import { NavigationActions } from 'react-navigation';
-import styles from './styles';
-import { StatusBar, Dimensions } from 'react-native';
+import { Dimensions, DatePickerIOS, TextInput } from 'react-native';
 const { width, height } = Dimensions.get('window');
+import styles from './styles';
+import { StatusBar } from 'react-native';
+import  PDatePicker from '../../components/datepicker/';
 import EDialog from '../../components/edialog';
 import { API } from '../../constants/api';
 import { emailSignup, sendCode, verifyCode } from '../../actions/';
 import PLoading from '../../components/loading';
-import DatePicker from 'react-native-datepicker'
-import moment from 'moment';
 
 class PhoneSignupScreen extends Component{
     static navigationOptions = {
         header: null
-    }
+    };
 
     constructor(props){
         super(props);
 
-       this.state = {
+        this.state = {
             progress: 1,
             step: 0,
             hidePass: true,
-            date: moment().format("YYYY-MM-D"),
+            date: new Date(),
             showDatePicker: false,
             gender: true,
             marital: false,
@@ -215,7 +216,7 @@ class PhoneSignupScreen extends Component{
                 var params = {
                     phone: this.state.phone,
                     email: this.state.email,
-                    birthday: this.state.date,
+                    birthday: this.showDateFormat(),
                     zipcode: this.state.zipcode,
                     gender: this.state.gender,
                     marital: this.state.marital,
@@ -263,7 +264,7 @@ class PhoneSignupScreen extends Component{
                     }else{
                         //save token
                         dispatch({type: 'login', data: data});
-                        dispatch(NavigationActions.navigate({routeName: 'tab'}));
+                        dispatch(NavigationActions.navigate({routeName: 'Tab'}));
                     }                    
                 })
                 .catch(err => {
@@ -278,12 +279,31 @@ class PhoneSignupScreen extends Component{
 
     onLogin(){
         var { dispatch } = this.props;
-        dispatch(NavigationActions.navigate({routeName: 'auth', params: { type: 'login' }}));
+        dispatch(NavigationActions.navigate({routeName: 'Login', params: { type: 'login' }}));
     }
 
     togglePass(){
         this.setState({
             hidePass: !this.state.hidePass
+        });
+    }
+
+    onCancel(){
+        this.setState({
+            showDatePicker: false
+        });
+    }
+    
+    onDone(date){
+        this.setState({
+            date: new Date(date),
+            showDatePicker: false
+        });
+    }
+
+    onDatePicker(){
+        this.setState({
+            showDatePicker: true
         });
     }
 
@@ -312,7 +332,7 @@ class PhoneSignupScreen extends Component{
                     num1: text.substring(text.length-1, text.length)
                 });
                 if(text.length > 0){
-                    //this.refs[2].focus();
+                    this.refs[2].focus();
                 }
                 break;
             case 2:
@@ -320,7 +340,7 @@ class PhoneSignupScreen extends Component{
                     num2: text.substring(text.length-1, text.length)
                 });
                 if(text.length > 0){
-                    //this.refs[3].focus();
+                    this.refs[3].focus();
                 }
                 break;
             case 3:
@@ -328,7 +348,7 @@ class PhoneSignupScreen extends Component{
                     num3: text.substring(text.length-1, text.length)
                 });
                 if(text.length > 0){
-                    //this.refs[4].focus();
+                    this.refs[4].focus();
                 }
                 break;
             case 4:
@@ -336,7 +356,7 @@ class PhoneSignupScreen extends Component{
                     num4: text.substring(text.length-1, text.length)
                 });
                 if(text.length > 0){
-                    //this.refs[5].focus();
+                    this.refs[5].focus();
                 }
                 break;
             case 5:
@@ -344,7 +364,7 @@ class PhoneSignupScreen extends Component{
                     num5: text.substring(text.length-1, text.length)
                 });
                 if(text.length > 0){
-                    //this.refs[6].focus();
+                    this.refs[6].focus();
                 }
                 break;
             case 6:
@@ -375,6 +395,10 @@ class PhoneSignupScreen extends Component{
         }
     }
 
+    showDateFormat(){
+        return this.state.date.getFullYear() + "-" + (this.state.date.getMonth() < 9? ("0" + (this.state.date.getMonth() + 1)):(this.state.date.getMonth()+ 1)) + "-" + (this.state.date.getDate() < 9? ("0" + (this.state.date.getDate())): (this.state.date.getDate()));
+    }
+
     onErrorClose(){
         this.setState({
             isError: false,
@@ -389,206 +413,173 @@ class PhoneSignupScreen extends Component{
                 <Header style={styles.header}>
                     <Left>
                         <Button transparent onPress={() => this.onBack()}>
-                            <Icon name="arrow-back" style={styles.headerIcon}/>
+                            <Thumbnail square source={require('../../assets/icNavBackBlack.png')} style={styles.backBtnIcon}/>
                         </Button>
                     </Left>
-                    <Body>
-                        <Title style={styles.title}>Sign Up</Title>
-                    </Body>
                     <Right>
                         <Button transparent onPress={() => this.onLogin()}>
-                            <Label style={styles.headerBtnText}>Log In</Label>
+                            <Text style={styles.signupBtnText}>Log In</Text>
                         </Button>
                     </Right>
                 </Header>
                 {this.state.isError?
                 <EDialog errorText={this.state.errorText} onClose={() => this.onErrorClose()}/>: null}
-                <View style={styles.progressContainer}>
-                    <View style={[styles.progress, { width: (width /3) * (this.state.progress ) }]}/>
-                </View>
-                {this.state.step == 0?
-                <Content>
-                    <Text style={styles.text}>Enter your phone number.</Text>
-                    <Form style={styles.formContainer}>
-                        <Item stackedLabel style={styles.formItem}>
-                            <Label style={styles.formItemLabel}>NUMBER</Label>
-                            <Input style={styles.formInput} keyboardType="numeric" value={this.state.phone} onChangeText={(text) => this.onChangeText(text, 'phone')}/>
-                        </Item>
-                    </Form>
-                    <Text style={styles.text1}>
-                        Tap Next to get an SMS confirmation from Account Kit powered by Facebook. <Text style={styles.linkText}>Learn more</Text>
-                    </Text>
-                    <Button style={styles.nextBtn} onPress={() => this.onNext(0, 1)}>
-                        <Label style={styles.nextBtnText}>Next</Label>
-                    </Button>
-                </Content>:null}
-                {this.state.step == 1?
-                <Content>
-                    <Text style={styles.text}>Enter your code.</Text>
-                    <View style={styles.codeContainer}>
-                        <View style={styles.codeItemContainer}>
-                            <Input style={styles.codeItemInput} keyboardType="numeric" maxLength={2} onChangeText={(text) => this.onChangeText(text, 1)} value={this.state.num1}/>
-                        </View>
-                        <View style={styles.codeItemContainer}>
-                            <Input style={styles.codeItemInput} keyboardType="numeric" maxLength={2} onChangeText={(text) => this.onChangeText(text, 2)} value={this.state.num2}/>
-                        </View>
-                        <View style={styles.codeItemContainer}>
-                            <Input style={styles.codeItemInput} keyboardType="numeric" maxLength={2} onChangeText={(text) => this.onChangeText(text, 3)} value={this.state.num3}/>
-                        </View>
-                        <View style={styles.codeItemContainer}>
-                            <Input style={styles.codeItemInput} keyboardType="numeric" maxLength={2} onChangeText={(text) => this.onChangeText(text, 4)} value={this.state.num4}/>
-                        </View>
-                        <View style={styles.codeItemContainer}>
-                            <Input style={styles.codeItemInput} keyboardType="numeric" maxLength={2} onChangeText={(text) => this.onChangeText(text, 5)} value={this.state.num5}/>
-                        </View>
-                        <View style={styles.codeItemContainer}>
-                            <Input style={styles.codeItemInput} keyboardType="numeric" maxLength={2} onChangeText={(text) => this.onChangeText(text, 6)} value={this.state.num6}/>
-                        </View>
+                <Content style={styles.content}>
+                    <View style={styles.progressContainer}>
+                        <View style={[styles.progress, {width: width /3 * this.state.progress}]}/>
                     </View>
-                    <Text style={styles.sendBtnText}>Send New Code</Text>
-                    <Text style={styles.descText}>
-                        Tap Continue to accept Facebook’s <Text style={styles.linkText}>Terms, Data Policy, cookie use</Text> and the <Text style={styles.linkText}>Privacy Policy</Text> and <Text style={styles.linkText}>Terms of Service</Text> of Pinaka.
-                    </Text>
-                    <Button style={styles.nextBtn} onPress={() => this.onNext(1,1)}>
-                        <Label style={styles.nextBtnText}>Continue</Label>
-                    </Button>
-                </Content>: null}
-                {this.state.step == 2?
-                <Content>
-                    <Text style={styles.text}>
-                        Please, enter your information.
-                    </Text>
-                    <Form style={styles.formContainer}>
-                        <Item stackedLabel style={styles.formItemContainer}>
-                            <Label style={styles.formItemLabel}>
-                                EMAIL
-                            </Label>
-                            <Input style={styles.formInput} value={this.state.email} onChangeText={(text) => this.onChangeText(text, 'email')}/>
-                        </Item>
-                        <Grid style={styles.gridFormContainer}>
-                            <Col style={styles.birthdayContainer}>
-                                <Item stackedLabel style={styles.formItemContainer}>
-                                    <Label style={styles.formItemLabel}>
-                                        BIRTHDAY
-                                    </Label>
-                                    <View style={styles.birthdayWrapper}>
-                                    <DatePicker 
-                                        style={{width: 200}}
-                                        date={this.state.date}
-                                        mode="date"
-                                        placeholder="Select your birthday"
-                                        format="YYYY-MM-DD"
-                                        confirmBtnText="Done"
-                                        cancelBtnText="Cancel"
-                                        onDateChange={(date) => this.setState({date: date})}
-                                        showIcon={false}
-                                        customStyles={{
-                                            dateInput: styles.birthdayText,
-                                            dateText: {
-                                                color: 'white',
-                                                fontFamily: 'Roboto',
-                                                fontWeight: 'normal',
-                                                fontSize: 16,
-                                                lineHeight: 33
+                    {this.state.step == 0?
+                    <View style={styles.blockContainer}>
+                        <Text style={styles.signupTitle}>Sign Up</Text>
+                        <Text style={styles.descText}>Enter your phone number.</Text>
+                        <Form style={styles.form}>
+                            <Item stackedLabel style={styles.formItem}>
+                                <Label style={styles.formLabel}>NUMBER</Label>
+                                <Input style={styles.formInput} keyboardType="numeric" value={this.state.phone} onChangeText={(text) => this.onChangeText(text, 'phone')}/>
+                            </Item>
+                        </Form>
+                        <Text style={styles.phoneText1}>
+                            Tap Next to get an SMS confirmation from Account Kit powered by Facebook. <Text style={styles.moreBtn}>Learn more</Text>
+                        </Text>
+                        <Button block style={styles.nextBtn} onPress={() => this.onNext(0, 1)}>
+                            <Text style={styles.nextBtnText}>Next</Text>
+                        </Button>
+                    </View>: null}
+                    {this.state.step == 1?
+                    <View style={styles.blockContainer}>
+                        <Text style={styles.signupTitle}>Sign Up</Text>
+                        <Text style={styles.descText}>Enter your code.</Text>
+                        <View style={styles.codeContainer}>
+                            <TextInput ref="1" style={styles.codeItem} keyboardType="numeric" maxLength={2} onChangeText={(text) => this.onChangeText(text, 1)} value={this.state.num1}/>
+                            <TextInput ref="2" style={styles.codeItem} keyboardType="numeric" maxLength={2} onChangeText={(text) => this.onChangeText(text, 2)} value={this.state.num2}/>
+                            <TextInput ref="3" style={styles.codeItem} keyboardType="numeric" maxLength={2} onChangeText={(text) => this.onChangeText(text, 3)} value={this.state.num3}/>
+                            <TextInput ref="4" style={styles.codeItem} keyboardType="numeric" maxLength={2} onChangeText={(text) => this.onChangeText(text, 4)} value={this.state.num4}/>
+                            <TextInput ref="5" style={styles.codeItem} keyboardType="numeric" maxLength={2} onChangeText={(text) => this.onChangeText(text, 5)} value={this.state.num5}/>
+                            <TextInput ref="6" style={styles.codeItem} keyboardType="numeric" maxLength={2} onChangeText={(text) => this.onChangeText(text, 6)} value={this.state.num6}/>                            
+                        </View>                        
+                        <Text style={styles.sendBtnText}>Send New Code</Text>
+                        <Text style={styles.sendDescText}>
+                            Tap Continue to accept Facebook’s <Text style={styles.termBtnText}>Terms, Data Policy, cookie use</Text> and the <Text style={styles.termBtnText}>Privacy Policy</Text> and <Text style={styles.termBtnText}>Terms of Service</Text> of Pinaka.
+                        </Text>
+                        <Button block style={styles.nextBtn} onPress={() => this.onNext(1,1)}>
+                            <Text style={styles.nextBtnText}>Continue</Text>
+                        </Button>
+                    </View>: null}
+                    {this.state.step == 2?
+                    <View style={styles.blockContainer}>
+                        <Text style={styles.signupTitle}>Sign Up</Text>
+                        <Text style={styles.descText}>Please, enter your information.</Text>
+                        <Form style={styles.form}>
+                            <Item stackedLabel style={styles.formItem}>
+                                <Label style={styles.formLabel}>EMAIL</Label>
+                                <Input style={styles.formInput} value={this.state.email} onChangeText={(text) => this.onChangeText(text, 'email')}/>
+                            </Item>
+                            <Grid>
+                                <Col style={styles.birthdayInputContainer}>
+                                    <Item stackedLabel style={styles.formItem}>
+                                        <Label style={styles.formLabel}>BIRTHDAY</Label>
+                                        <Text  onPress={() => this.onDatePicker()} style={[styles.formInput,{ width: width/2 -41, lineHeight: 48}]}>{this.showDateFormat()}</Text>
+                                    </Item>
+                                </Col>
+                                <Col style={styles.zipcodeInputContainer}>
+                                    <Item stackedLabel style={styles.formItem}>
+                                        <Label style={styles.formLabel}>ZIP CODE</Label>
+                                        <Input style={styles.formInput} keyboardType="numeric" value={this.state.zipcode} onChangeText={(text) => this.onChangeText(text, 'zipcode')}/>
+                                    </Item>
+                                </Col>
+                            </Grid>
+                            <List style={styles.listForm}>
+                                <ListItem style={styles.listFormItem}>   
+                                    <Body>                           
+                                        <Text style={styles.listFormItemText}>GENDER</Text>
+                                    </Body>
+                                    <Right>
+                                        <Button transparent style={styles.rightBtn} onPress={() => this.toggleGender(true)}>
+                                            {this.state.gender?
+                                            <Thumbnail square source={require('../../assets/profile/femaleSelected.png')} style={styles.manIcon}/>:
+                                            <Thumbnail square source={require('../../assets/profile/femaleNormal.png')} style={styles.manIcon}/>
                                             }
-                                        }}
-                                        />
-                                    </View>
-                                </Item>
-                            </Col>
-                            <Col style={styles.zipcodeContainer}>
-                                <Item stackedLabel style={styles.formItemContainer}>
-                                    <Label style={styles.formItemLabel}>
-                                        ZIP CODE
-                                    </Label>
-                                    <Input style={styles.formInput} keyboardType="numeric" value={this.state.zipcode} onChangeText={(text) => this.onChangeText(text, 'zipcode')}/>
-                                </Item>
-                            </Col>
-                        </Grid>
-                    </Form>
-                    <View style={styles.additionalContainer}>
-                        <View style={styles.additionalItem}>
-                            <Text style={styles.additionalItemText}>GENDER</Text>
-                            <View style={styles.additionBtnContainer}>
-                                <Button transparent style={styles.additionalBtn} onPress={() => this.toggleGender(true)}>
-                                    {this.state.gender?
-                                    <Thumbnail square source={require('../../assets/femaleSelected.png')} style={styles.additionalBtnIcon}/>
-                                    :
-                                    <Thumbnail square source={require('../../assets/femaleNormal.png')} style={styles.additionalBtnIcon}/>
-                                    }
-                                </Button>
-                                <Button transparent style={styles.additionalBtn} onPress={() => this.toggleGender(false)}>
-                                    {this.state.gender?
-                                    <Thumbnail square source={require('../../assets/maleNormal.png')} style={styles.additionalBtnIcon}/>:
-                                    <Thumbnail square source={require('../../assets/maleSelected.png')} style={styles.additionalBtnIcon}/>
-                                    }
-                                </Button>
-                            </View>
-                        </View>
-                        <View style={styles.additionalItem}>
-                            <Text style={styles.additionalItemText}>MARITAL STATUS</Text>
-                            <View style={styles.additionBtnContainer}>
-                                <Button transparent style={styles.additionalBtn} onPress={() => this.toggleMarital(true)}>
-                                    {this.state.marital?
-                                    <Thumbnail square source={require('../../assets/marriedSelected.png')} style={styles.additionalBtnIcon}/>:
-                                    <Thumbnail square source={require('../../assets/marriedNormal.png')} style={styles.additionalBtnIcon}/>
-                                    }
-                                </Button>
-                                <Button transparent style={styles.additionalBtn} onPress={() => this.toggleMarital(false)}>
-                                    {this.state.marital?
-                                    <Thumbnail square source={require('../../assets/maleNormal.png')} style={styles.additionalBtnIcon}/>:
-                                    <Thumbnail square source={require('../../assets/maleSelected.png')} style={styles.additionalBtnIcon}/>
-                                    }
-                                </Button>
-                            </View>
-                        </View>
-                        <View style={styles.additionalItem}>
-                            <Text style={styles.additionalItemText}>DO YOU HAVE KIDS?</Text>
-                            <View style={styles.additionBtnContainer}>
-                                <Button transparent style={styles.additionalBtn} onPress={() => this.toggleKids(true)}>
-                                    {this.state.kids?
-                                    <Thumbnail square source={require('../../assets/yesSelected.png')} style={styles.additionalBtnIcon}/>:
-                                    <Thumbnail square source={require('../../assets/yesNormal.png')} style={styles.additionalBtnIcon}/>
-                                    }
-                                </Button>
-                                <Button transparent style={styles.additionalBtn} onPress={() => this.toggleKids(false)}>
-                                    {this.state.kids?
-                                    <Thumbnail square source={require('../../assets/noNormal.png')} style={styles.additionalBtnIcon}/>:
-                                    <Thumbnail square source={require('../../assets/noSelected.png')} style={styles.additionalBtnIcon}/>
-                                    }
-                                </Button>
-                            </View>
-                        </View>
-                    </View>
-                    <Button style={styles.nextBtn} onPress={() => this.onNext(1,1)}>
-                        <Label style={styles.nextBtnText}>Continue</Label>
-                    </Button>
-                </Content>:null}
-                {this.state.step == 3?
-                <Content>
-                    <Text style={styles.text}>Create a password.</Text>
-                    <Text style={styles.text1}>Your password must include at least one symbol and be eight or more characters long</Text>
-                    <Form style={styles.formContainer}>
-                        <Item stackedLabel style={styles.formItemContainer}>
-                            {this.state.hidePass?
-                            <Label style={styles.showText} onPress={() => this.togglePass()}>
-                                Show
-                            </Label>:
-                            <Label style={styles.showText} onPress={() => this.togglePass()}>
-                                Hide
-                            </Label>
-                            }
-                            <Label style={styles.formItemLabel}>
-                                PASSWORD
-                            </Label>
-                            <Input style={styles.formInput} secureTextEntry={this.state.hidePass} value={this.state.password} onChangeText={(text) => this.onChangeText(text, 'password')}/>
-                        </Item>
-                    </Form>
-                    <Button style={styles.nextBtn} onPress={() => this.onNext(1,1)}>
-                        <Label style={styles.nextBtnText}>Sign Up</Label>
-                    </Button>
-                </Content>: null}
-                {this.state.isLoading?<PLoading color="white"/>:null}  
+                                        </Button>
+                                    </Right>
+                                    <Right>
+                                        <Button transparent style={styles.rightBtn} onPress={() => this.toggleGender(false)}>
+                                            {this.state.gender?
+                                            <Thumbnail square source={require('../../assets/profile/maleNormal.png')} style={styles.manIcon}/>:
+                                            <Thumbnail square source={require('../../assets/profile/maleSelected.png')} style={styles.manIcon}/>
+                                            }
+                                        </Button>
+                                    </Right>
+                                </ListItem>
+                                <ListItem style={styles.listFormItem}>   
+                                    <Body>                           
+                                        <Text style={styles.listFormItemText}>MARITAL STATUS</Text>
+                                    </Body>
+                                    <Right>
+                                        <Button transparent style={styles.rightBtn} onPress={() => this.toggleMarital(true)}>
+                                            {this.state.marital?
+                                            <Thumbnail square source={require('../../assets/profile/marriedSelected.png')} style={styles.manIcon}/>:
+                                            <Thumbnail square source={require('../../assets/profile/marriedNormal.png')} style={styles.manIcon}/>
+                                            }
+                                        </Button>
+                                    </Right>
+                                    <Right>
+                                        <Button transparent style={styles.rightBtn} onPress={() => this.toggleMarital(false)}>
+                                            {this.state.marital?
+                                            <Thumbnail square source={require('../../assets/profile/maleNormal.png')} style={styles.manIcon}/>:
+                                            <Thumbnail square source={require('../../assets/profile/maleSelected.png')} style={styles.manIcon}/>
+                                            }
+                                        </Button>
+                                    </Right>
+                                </ListItem>
+                                <ListItem style={styles.listFormItem}>   
+                                    <Body>                           
+                                        <Text style={styles.listFormItemText}>DO YOU HAVE KIDS?</Text>
+                                    </Body>
+                                    <Right>
+                                        <Button transparent style={styles.rightBtn} onPress={() => this.toggleKids(true)}>
+                                            {this.state.kids?
+                                            <Thumbnail square source={require('../../assets/profile/yesSelected.png')} style={styles.manIcon}/>:
+                                            <Thumbnail square source={require('../../assets/profile/yesNormal.png')} style={styles.manIcon}/>
+                                            }
+                                        </Button>
+                                    </Right>
+                                    <Right>
+                                        <Button transparent style={styles.rightBtn} onPress={() => this.toggleKids(false)}>
+                                            {this.state.kids?
+                                            <Thumbnail square source={require('../../assets/profile/noNormal.png')} style={styles.manIcon}/>:
+                                            <Thumbnail square source={require('../../assets/profile/noSelected.png')} style={styles.manIcon}/>
+                                            }
+                                        </Button>
+                                    </Right>
+                                </ListItem>
+                            </List>
+                        </Form>
+                        <Button block style={styles.nextBtn} onPress={() => this.onNext(1,1)}>
+                            <Text style={styles.nextBtnText}>Continue</Text>
+                        </Button>
+                    </View>: null}
+                    {this.state.step==3?
+                    <View style={styles.blockContainer}>
+                        <Text style={styles.signupTitle}>Create a password</Text>
+                        <Text style={styles.passwordDescText}>Your password must include at least one symbol and be eight or more characters long.</Text>
+                        <Form style={styles.form}>
+                            <Item stackedLabel style={styles.formItem}>
+                                {this.state.hidePass?
+                                <Label style={styles.passwordShowBtn} onPress={() => this.togglePass()}>Show</Label>:
+                                <Label style={styles.passwordShowBtn} onPress={() => this.togglePass()}>Hide</Label>}
+                                <Label style={styles.formLabel}>PASSWORD</Label>
+                                <Input style={styles.formInput} secureTextEntry={this.state.hidePass} value={this.state.password} onChangeText={(text) => this.onChangeText(text, 'password')}/>
+                            </Item>
+                        </Form>
+                        <Button block style={styles.nextBtn} onPress={() => this.onNext(1,1)}>
+                            <Text style={styles.nextBtnText}>Sign Up</Text>
+                        </Button>
+                    </View>: null}                    
+                </Content>   
+                {this.state.showDatePicker?
+                <PDatePicker date={this.state.date}  onCancel={() => this.onCancel()} onDone={(date) => this.onDone(date)}/> : null
+                }
+                {this.state.isLoading?<PLoading color="white"/>:null}        
             </Container>
         );
     }

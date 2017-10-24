@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {
+import { 
     Container,
     Content,
     Body,
@@ -12,16 +12,15 @@ import {
     ListItem,
     Left,
     Button
-} from 'native-base';
+ } from 'native-base';
 import { NavigationActions } from 'react-navigation';
 import styles from './styles';
 import { StatusBar } from 'react-native';
-import { API } from '../../constants/api';
 
 class ShareScreen extends Component{
     static navigationOptions = {
         header: null
-    }
+    };
 
     onBack(){
         var { dispatch } = this.props;
@@ -29,55 +28,54 @@ class ShareScreen extends Component{
     }
 
     render(){
-        StatusBar.setBarStyle('light-content');
+        StatusBar.setBarStyle('dark-content');
         return (
             <Container style={styles.container}>
                 <Header style={styles.header}>
                     <Left>
                         <Button transparent onPress={() => this.onBack()}>
-                            <Icon name="md-close" style={styles.headerIcon}/>
+                            <Thumbnail square source={require('../../assets/share/icNavCloseBalck.png')} style={styles.backBtnIcon}/>
                         </Button>
                     </Left>
-                    <Body></Body>
                 </Header>
                 <Content>
                     <Body style={styles.body}>
-                        <Thumbnail square source={{uri: API.SERVER + this.props.navigation.state.params.feed.image}} style={styles.image}/>
+                        <Thumbnail square source={require('../../assets/home/1.png')} style={styles.image}/>
                         <Text style={styles.title}>Bowling</Text>
                         <List style={styles.list}>
-                            <ListItem style={styles.listItem}>
+                            <ListItem style={styles.listItem}>                                
                                 <Body style={styles.listItemBody}>
-                                    <Icon  name="mail" style={styles.listItemIcon}/>
+                                    <Icon name="mail"  style={styles.listItemIcon}/>
                                     <Text style={styles.listItemText}>Email</Text>
                                 </Body>
                             </ListItem>
-                            <ListItem style={styles.listItem}>
+                            <ListItem style={styles.listItem}>                                
                                 <Body style={styles.listItemBody}>
-                                    <Icon name="chatbubbles" style={styles.listItemIcon}/>
+                                    <Icon name="chatbubbles"  style={styles.listItemIcon}/>
                                     <Text style={styles.listItemText}>Messages</Text>
                                 </Body>
                             </ListItem>
-                            <ListItem style={styles.listItem}>
+                            <ListItem style={styles.listItem}>                                
                                 <Body style={styles.listItemBody}>
-                                    <Icon name="logo-facebook" style={styles.listItemIcon}/>
+                                    <Icon name="logo-facebook"  style={styles.listItemIcon}/>
                                     <Text style={styles.listItemText}>Facebook</Text>
                                 </Body>
                             </ListItem>
-                            <ListItem style={styles.listItem}>
+                            <ListItem style={styles.listItem}>                                
                                 <Body style={styles.listItemBody}>
-                                    <Icon name="link" style={styles.listItemIcon}/>
+                                    <Icon name="link"  style={styles.listItemIcon}/>
                                     <Text style={styles.listItemText}>Copy link</Text>
                                 </Body>
                             </ListItem>
-                            <ListItem style={styles.listItem}>
+                            <ListItem style={styles.listItem}>                                
                                 <Body style={styles.listItemBody}>
-                                    <Icon name="logo-twitter" style={styles.listItemIcon}/>
+                                    <Icon name="logo-twitter"  style={styles.listItemIcon}/>
                                     <Text style={styles.listItemText}>Twitter</Text>
                                 </Body>
                             </ListItem>
-                            <ListItem style={styles.listItem}>
+                            <ListItem style={styles.listItem}>                                
                                 <Body style={styles.listItemBody}>
-                                    <Icon name="more" style={styles.listItemIcon}/>
+                                    <Icon name="more"  style={styles.listItemIcon}/>
                                     <Text style={styles.listItemText}>More</Text>
                                 </Body>
                             </ListItem>
@@ -85,7 +83,7 @@ class ShareScreen extends Component{
                     </Body>
                 </Content>
             </Container>
-        );
+        )
     }
 }
 

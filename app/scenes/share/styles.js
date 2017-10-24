@@ -9,11 +9,12 @@ export default {
 
     header: {
         backgroundColor: 'transparent',
-        elevation: 0
+        borderBottomWidth: 0
     },
 
-    headerIcon: {
-        color: 'black'
+    backBtnIcon: {
+        width: 25,
+        height: 25
     },
 
     body: {
@@ -29,23 +30,22 @@ export default {
 
     title: {
         fontSize: 22,
-        color: 'black',
+        color: '#000',
         marginTop: 12,
-        fontFamily: 'Roboto',
-        fontWeight: 'bold',
+        fontFamily: 'SanFranciscoText-Bold',
         textAlign: 'center',
-        marginBottom: 12
+        marginBottom: 32
     },
 
     list: {
-        width: width - 40
+        width: (width - 40)
     },
 
     listItem: {
         marginLeft: 0,
         paddingRight: 0,
         borderBottomWidth: 1,
-        borderBottomColor: '#dddde1'
+        borderBottomColor: 'rgb(221,221,225)'
     },
 
     listItemBody: {
@@ -59,9 +59,8 @@ export default {
     },
 
     listItemText: {
-        fontSize: 16,
-        fontFamily: 'Roboto',
-        fontWeight: 'normal',
-        color: 'black'
+        fontSize: 20,
+        fontFamily: 'SanFranciscoText-Regular',
+        color: '#000'
     }
 }

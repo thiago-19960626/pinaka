@@ -22,9 +22,9 @@ import {
     Footer
 } from 'native-base';
 import { NavigationActions } from 'react-navigation';
+import QRCode from 'react-native-qrcode';
 import styles from './styles';
 import { StatusBar } from 'react-native';
-import QRCode from 'react-native-qrcode';
 import { API } from '../../constants/api';
 import moment from 'moment';
 import PLoading from '../../components/loading';
@@ -36,7 +36,7 @@ class ReservationDetailScreen extends Component{
     };
 
     constructor(props){
-        super(props)
+        super(props);
 
         this.state = {
             reservation: this.props.navigation.state.params.reservation,
@@ -77,7 +77,7 @@ class ReservationDetailScreen extends Component{
                 }
             }
             dispatch({type: 'setreservation', data: newreservations});
-            dispatch(NavigationActions.navigate({routeName: 'tab'}));//go to home page
+            dispatch(NavigationActions.navigate({routeName: 'Tab'}));//go to home page
         })
         .catch(err => {
             //hide indicator
@@ -92,21 +92,24 @@ class ReservationDetailScreen extends Component{
         return (
             <Container style={styles.container}>
                 <Thumbnail square source={{uri: API.SERVER + this.state.reservation.feed_id.image}} style={styles.image}/>
-                <Header style={styles.header}>
+                <Header style={styles.header}>                    
                     <Left>
                         <Button transparent onPress={() => this.onBack()}>
-                            <Icon name="arrow-back" style={styles.headerIcon}/>
+                            <Thumbnail square source={require('../../assets/icNavBackBlack.png')} style={styles.backBtnIcon}/>
                         </Button>
-                    </Left>
-                    <Body></Body>
+                    </Left>                                    
                 </Header>
                 <Content style={styles.content}>
-                    <Text style={styles.title}>
-                        {this.state.reservation.feed_id.heading}
+                    <Text style={styles.nameText}>{this.state.reservation.feed_id.heading}</Text>
+                    <Text style={styles.locationText}>
+                        <Icon name="md-pin" style={styles.pinIcon}/> Boronia St & Anzac Parade, NSW 2033
                     </Text>
-                    <Text style={styles.locationText}><Icon name="pin" style={styles.pinIcon}/>  Boronia St & Anzac Parade, NSW 2033</Text>
-                    <Text style={styles.dateText}>{moment(this.state.reservation.booking_time).format("dddd, D MMM, YYYY")}</Text>
-                    <Text style={styles.timeText}>{this.showBookingTime(this.state.reservation)}</Text>
+                    <Text style={styles.dateText}>
+                        {moment(this.state.reservation.booking_time).format("dddd, D MMM, YYYY")}
+                    </Text>
+                    <Text style={styles.timeText}>
+                        {this.showBookingTime(this.state.reservation)}
+                    </Text>
                     <View style={styles.divider}/>
                     <Text style={styles.qrText}>
                         QR - Code
@@ -127,7 +130,7 @@ class ReservationDetailScreen extends Component{
                             ${this.state.reservation.purchase_amount.toFixed(2)}
                         </Text>
                         <View iconLeft style={styles.paidMark}>     
-                            <Icon name="ios-checkmark" style={styles.checkIcon}/>                       
+                            <Icon name="checkmark" style={styles.checkIcon}/>                       
                             <Text style={styles.paidText}> Paid</Text>
                         </View>
                     </View>
@@ -138,9 +141,9 @@ class ReservationDetailScreen extends Component{
                     <Text style={styles.descText}>
                         {this.state.reservation.feed_id.description}
                     </Text>
-                    <View style={styles.divider}/>                    
+                    <View style={styles.divider}/>
                     <Button block style={styles.cancelBtn} onPress={() => this.onCancel()}>
-                        <Label style={styles.cancelBtnText}>Cancel Reservation</Label>                        
+                        <Text style={styles.cancelBtnText}>Cancel Reservation</Text>
                     </Button>
                     <View style={{height: 16}}/>
                 </Content>

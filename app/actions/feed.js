@@ -5,7 +5,7 @@ function getFeedList(token, type, tag){
         fetch(API.SERVER_DEV_URL + 'feed/list?token='+token + '&type=' + type+'&page=0&perpage=50&tag='+tag, {
             method: 'GET',
             headers: {
-                'Content-Type': 'multipart/form-data'
+                'Content-Type': 'application/json'
             }
         })
         .then((res) => res.json())

@@ -1,130 +1,112 @@
 import { Dimensions } from 'react-native';
-const { width, height } = Dimensions.get('window');
+const { width, height }  = Dimensions.get('window');
 import { Colors } from '../../constants';
 
 export default {
     container: {
-        backgroundColor:  Colors.main
+        backgroundColor: '#fff',
     },
 
     header: {
         backgroundColor: 'transparent',
-        paddingLeft: 0,
-        paddingRight: 0,
-        borderBottomWidth: 0,
-        elevation: 0
+        borderBottomWidth: 0
     },
 
-    headerIcon: {
-        color: 'white'
+    backBtnIcon: {
+        width: 25,
+        height: 25
+    },
+
+    saveBtnText: {
+        fontSize: 17,
+        fontFamily: 'SanFranciscoText-Regular',
+        color: '#000'
     },
 
     content: {
-        backgroundColor: 'white'
-    },
-
-    headerLeftBtn: {
-        marginLeft: 5
-    },
-
-    headerRightBtn: {
-        marginRight: 0
+        paddingLeft: 20,
+        paddingRight: 20,
+        paddingTop: 24
     },
 
     image: {
-        width: width,
-        height: 200
+        width: 88,
+        height: 88,
+        borderRadius: 44
     },
 
-    basicTitle: {
-        fontFamily: 'Roboto',
-        fontWeight: 'bold',
-        color: 'black',
+    changeText: {
+        marginTop: 12,
+        fontFamily: 'SanFranciscoText-Regular',
+        color: 'rgb(255,169,88)',
+        fontSize: 14,
+        paddingTop: 5,
+        paddingBottom: 5
+    },
+
+    detailText: {
         marginTop: 32,
-        fontSize: 16,
-        marginLeft: 16,
-        marginRight: 16,
-        marginBottom: 16
+        fontSize: 17,
+        fontFamily: 'SanFranciscoText-Bold',
+        color: '#000'
     },
 
     form: {
-        marginLeft: 16,
-        marginRight: 16
+        marginTop: 16
     },
 
     formItem: {
         marginLeft: 0,
-        marginBottom: 16
+        marginBottom: 16,
+        borderBottomWidth: 1,
+        borderBottomColor: 'rgb(221,221,225)',
+        position: 'relative'
     },
 
-    formItemLabel: {
-        fontFamily: 'Roboto',
-        fontWeight: 'normal',
-        fontSize: 12,
-        color: '#9b9ba8',
-        top: 0,
-        paddingRight: 0,
-        paddingBottom: 0,
-        paddingTop: 0
-    },
-
-    formItemInput: {
-        fontFamily: 'Roboto',
-        fontWeight: 'normal',
-        fontSize: 16,
-        color: 'black',
-        height: 48
-    },
-
-    birthContainer: {
-        paddingRight: 8
-    },
-
-    zipContainer: {
-        paddingLeft: 8
-    },
-
-    birthText: {
-        height: 48,
-        marginLeft: 0,
-        width: ( width - 48 ) / 2,
-        alignItems: 'flex-start',
-        justifyContent: 'center',
-        borderWidth: 0
-    },
-
-    birthdayWrapper: {
-        width: (width - 48)/2,
-        height: 45
-    },
-
-    additionalContainer: {
-        marginLeft: 16,
-        marginRight: 16,
-        marginTop: 32
-    },
-
-    additionalItem: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        marginBottom: 20
-    },
-
-    additionalItemText: {
-        fontFamily: 'Roboto',
-        fontWeight: 'normal',
+    formLabel: {
+        paddingTop: 0,
+        marginBottom: 8,
         fontSize: 14,
-        color: 'black'
+        fontFamily: 'SanFranciscoText-Regular',
+        color: '#000'
     },
 
-    additionBtnContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        width: 100
+    formInput: {
+        height: 48,
+        color: '#000',
+        fontFamily: 'SanFranciscoText-Regular'
     },
 
-    additionalBtn: {
+    birthdayContainer: {
+        marginRight: 8
+    },
+
+    zipcodeContainer: {
+        marginLeft: 8
+    },
+
+    list: {
+        marginTop: 5
+    },
+
+    listItem: {
+        marginLeft: 0,
+        paddingRight: 0,
+        borderBottomWidth: 0
+    },
+
+    listItemText: {
+        marginLeft: 0,
+        color: '#000',
+        fontFamily: 'SanFranciscoText-Regular',
+        fontSize: 14
+    },
+
+    listItemRight: {
+        alignItems: 'flex-end'
+    },
+
+    rightBtn: {
         width: 40,
         height: 40,
         paddingLeft: 0,
@@ -133,29 +115,21 @@ export default {
         paddingBottom: 0
     },
 
-    additionalBtnIcon: {
+    manIcon: {
         width: 40,
         height: 40
     },
 
-    checkContainer: {
-        flexDirection: 'row',
-        flexWrap: 'wrap'
+    interestText: {
+        marginTop: 32,
+        fontSize: 17,
+        fontFamily: 'SanFranciscoText-Bold',
+        color: '#000'
     },
 
-    checkItemContainer: {
-        width: width / 2
-    },
-
-    checkItem: {
-        paddingRight: 0,
+    checkListItem: {
+        marginLeft: 0,
         borderBottomWidth: 0
-    },
-
-    checkItemText: {
-        fontFamily: 'Roboto',
-        fontWeight: 'normal',
-        fontSize: 14,
-        color: 'black'
     }
+
 }

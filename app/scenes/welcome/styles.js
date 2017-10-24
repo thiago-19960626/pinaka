@@ -1,101 +1,87 @@
 import { Dimensions } from 'react-native';
-const { width, height } = Dimensions.get('window');
+const { width, height }  = Dimensions.get('window');
 import { Colors } from '../../constants';
-
 
 export default {
     container: {
         backgroundColor: Colors.main
     },
 
-    mainContainer: {
-        alignItems: 'center',
-        width: width
+    content: {
+        position: 'relative'
     },
 
-    logo: {
-        marginTop: 44,
-        width: 120,
-        height: 120
+    background: {
+        width: width,
+        height: height
     },
-    
+
+    welcomeText: {
+        marginTop: 100,
+        textAlign: 'center',
+        fontSize: 22,
+        letterSpacing: 6,
+        color: '#fff',
+        fontFamily: 'SanFranciscoText-Regular',
+        backgroundColor: 'transparent'
+    },
+
     logoText: {
-        fontFamily: 'SharpSansNo1-Medium',
-        fontSize: 54,
-        color: 'white',
-        marginTop: 4
+        marginTop: 10,
+        textAlign: 'center',
+        fontSize: 52,
+        letterSpacing: 1,
+        color: '#fff',
+        fontFamily: 'KiloGram',
+        backgroundColor: 'transparent'
     },
 
     bottomContainer: {
         position: 'absolute',
         bottom: 32,
-        left: 16,
-        right: 16,
-        width: (width - 32),
-        zIndex: 5
+        width: width
     },
 
-    bottomText1: {
-        color: 'white',
-        fontFamily: 'Roboto',
-        fontWeight: 'normal',
-        fontSize: 24,
-        textAlign: 'center'
+    signupBtnContainer: {
+        paddingLeft: 20,
+        paddingRight: 8
     },
 
-    bottomText2: {
-        color: 'white',
-        fontFamily: 'Roboto',
-        fontWeight: 'normal',
-        fontSize: 16,
-        textAlign: 'center',
-        marginTop: 9
-    },
-
-    bottomBtnContainer: {
-        height: 48,
-        marginTop: 32   ,
-        flexDirection: 'row',
-        justifyContent: 'space-between'  
-    },
-
-    signupBtn: {
-        backgroundColor: '#3f6ff6',
-        borderRadius: 100,
-        height: 48,
-        width: (width - 48)/2,
-        alignItems: 'center',
-        justifyContent: 'center',
-        paddingLeft: 0,
-        paddingRight: 0,
-        paddingTop: 0,
-        paddingBottom: 0       
-    },
-
-    signupBtnText: {
-        color: 'white',
-        fontFamily: 'Roboto',
-        fontWeight: 'medium',
-        fontSize: 18
+    loginBtnContainer: {
+        paddingLeft: 8,
+        paddingRight: 20
     },
 
     loginBtn: {
-        backgroundColor: '#e636a6',
+        backgroundColor: '#fff',
         borderRadius: 100,
-        height: 48,
-        width: (width - 48)/2,
         alignItems: 'center',
         justifyContent: 'center',
-        paddingLeft: 0,
-        paddingRight: 0,
-        paddingTop: 0,
-        paddingBottom: 0        
+        height: 57
     },
 
     loginBtnText: {
-        color: 'white',
-        fontFamily: 'Roboto',
-        fontWeight: 'medium',
-        fontSize: 18
+        fontSize: 20,
+        textAlign: 'center',
+        color: '#000',
+        fontFamily: 'SanFranciscoText-Medium'
+    },
+
+    bottomText1: {
+        fontSize: 28,
+        textAlign: 'center',
+        color: '#fff',
+        fontFamily: 'SanFranciscoText-Bold',
+        backgroundColor: 'transparent'
+    },
+
+    bottomText2: {
+        marginTop: 8,
+        marginBottom: 32,
+        fontSize: 17,
+        textAlign: 'center',
+        color: '#fff',
+        fontFamily: 'SanFranciscoText-Regular',
+        backgroundColor: 'transparent'
     }
 }

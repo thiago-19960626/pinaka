@@ -5,7 +5,7 @@ function getReservation(token, status){
         fetch(API.SERVER_DEV_URL + 'reservation?token=' + token + '&status=' + status, {
             method: 'GET',
             headers: {
-                'Content-Type': 'multipart/form-data'
+                'Content-Type': 'application/json'
             }
         })
         .then((res) => res.json())
@@ -33,11 +33,13 @@ function createReservation(token, params){
     formData.append('expired_m', params.expired_m);
     formData.append('expired_y', params.expired_y);
 
+    alert(params.booking_time);
+
     return new Promise((resolve, reject) => {
         fetch(API.SERVER_DEV_URL + 'reservation', {
             method: 'POST',
             headers: {
-                'Content-Type': 'multipart/form-data'
+                'Content-Type': 'application/json'
             },
             body: formData
         })
@@ -62,7 +64,7 @@ function cancelReservation(token, id){
         fetch(API.SERVER_DEV_URL + 'reservation/cancel', {
             method: 'POST',
             headers: {
-                'Content-Type': 'multipart/form-data'
+                'Content-Type': 'application/json'
             },
             body: formData
         })

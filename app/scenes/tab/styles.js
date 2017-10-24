@@ -1,5 +1,5 @@
 import { Dimensions } from 'react-native';
-const { width, height } = Dimensions.get('window');
+const { width, height }  = Dimensions.get('window');
 import { Colors } from '../../constants';
 
 export default {
@@ -8,8 +8,8 @@ export default {
     },
 
     footer: {
-        height: 56,
-        backgroundColor: 'white'
+        backgroundColor: '#fff',
+        height: 49
     },
 
     tabItem: {
@@ -18,7 +18,7 @@ export default {
     },
 
     tabItemContainer: {
-        width: width / 5
+        width: (width / 5)
     },
 
     tabItemBtn: {
@@ -26,49 +26,32 @@ export default {
         paddingRight: 0,
         paddingTop: 0,
         paddingBottom: 0,
-        width: width / 5,
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: 56
+        width: (width / 5)
     },
 
-    tabItemBtnContainer: {
+    tabBtnWrapper: {
+        width: (width / 5),
         alignItems: 'center',
         justifyContent: 'center'
     },
 
-    tabBtnHomeIcon: {
-        width: 24,
-        height: 24
+    tabBtnIcon: {
+        width: 25,
+        height: 25,
+        marginTop: 3.5
     },
 
-    tabBtnSavedIcon: {
-        width: 24,
-        height: 21
+    tabBtnText: {
+        fontSize: 10,
+        fontFamily: 'SanFranciscoText-Medium',
+        letterSpacing: 0.1,
+        color: '#000'
     },
 
-    tabBtnReservationIcon: {
-        width: 24,
-        height: 24
-    },
-
-    tabBtnProfileIcon: {
-        width: 24,
-        height: 24
-    },
-
-    tabBtnSettingIcon: {
-        width: 24,
-        height: 24
-    },
-
-    tabItemBtnText: {
-        fontFamily: 'Roboto',
-        fontWeight: 'normal',
-        fontSize: 12,
-        letterSpacing: 0.17,
-        color: '#e636a6',
-        marginTop: 5
+    tabBtnActiveText: {
+        fontSize: 10,
+        fontFamily: 'SanFranciscoText-Medium',
+        letterSpacing: 0.1,
+        color: 'rgb(230,54,166)'
     }
-
 }

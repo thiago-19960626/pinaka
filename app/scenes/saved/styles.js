@@ -10,38 +10,33 @@ export default {
     header: {
         backgroundColor: 'transparent',
         paddingLeft: 0,
-        paddingRight: 0,
-        elevation: 0
+        paddingRight: 0
     },
 
-    title: {
-        fontSize: 20,
-        fontFamily: 'Roboto',
-        fontWeight: 'medium',
-        color: 'white',
-        lineHeight: 28,
-        marginLeft: 16
+    headerTitle: {
+        fontSize: 17,
+        color: '#fff',
+        fontFamily: 'SanFranciscoText-Bold'
     },
 
     content: {
         backgroundColor: 'white',
-        paddingLeft: 0,
-        paddingRight: 0,
+        paddingLeft: 20,
+        paddingRight: 20,
         paddingTop: 4
     },
 
     listItem: {
-        marginLeft: 16,
+        marginLeft: 0,
         borderBottomWidth: 0,
-        marginTop: 16,
+        marginTop: 20,
         paddingTop: 0,
         paddingBottom: 0,
-        paddingRight: 0,
-        marginRight: 16
+        paddingRight: 0
     },
 
-    image: {
-        width: width - 32,
+    itemImage: {
+        width: (width - 40),
         height: 200,
         position: 'relative'
     },
@@ -53,52 +48,47 @@ export default {
     },
 
     itemPriceText1: {
-        color: 'black',
-        fontFamily: 'Roboto',
-        fontWeight: 'bold',
-        fontSize: 22
+        fontFamily: 'SanFranciscoText-Bold',
+        fontSize: 22,
+        color: '#000'
     },
 
-    itemPriceText2: {
-        color: '#9b9ba8',
-        fontFamily: 'Roboto',
-        fontWeight: 'normal',
-        fontSize: 16,
+    itemDiscount: {
+        fontSize: 18,
+        fontFamily: 'SanFranciscoText-Regular',
+        color: 'rgb(155,155,168)',
         textDecorationLine: 'line-through'
-    }, 
-
-    timeText: {
-        fontFamily: 'Roboto',
-        fontWeight: 'normal',
-        color: '#e636a6',
-        fontSize: 16,
-        marginTop: 8,
-        marginLeft: 0
     },
 
-    discountContainer: {
+    itemEstimatedTime: {
+        marginTop: 8,
+        marginLeft: 0,
+        fontSize: 17,
+        fontFamily: 'SanFranciscoText-Regular',
+        color: 'rgb(230,54,166)'
+    },
+
+    disccountContainer: {
         position: 'absolute',
         top: 0,
         left: 0,
         width: 70,
         height: 56,
-        backgroundColor: '#e636a6',
+        backgroundColor: 'rgb(230,54,166)',
         alignItems: 'center',
         justifyContent: 'center'
     },
 
-    discountPercent: {
+    disccountPercent: {
         fontSize: 20,
-        fontFamily: 'Roboto',
-        fontWeight: 'bold',
-        color: 'white'
+        fontFamily: 'SanFranciscoText-Bold',
+        color: '#fff'
     },
 
-    discountText: {
+    disccountText: {
         fontSize: 14,
-        fontFamily: 'Roboto',
-        fontWeight: 'medium',
-        color: 'white'
+        fontFamily: 'SanFranciscoText-Medium',
+        color: '#fff'
     },
 
     saveBtn: {
@@ -108,8 +98,8 @@ export default {
         width: 25,
         height: 25,
         paddingBottom: 0,
-        paddingTop: 0,
         paddingLeft: 0,
+        paddingTop: 0,
         paddingRight: 0
     },
 

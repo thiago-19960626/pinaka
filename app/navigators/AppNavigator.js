@@ -5,56 +5,52 @@ import {
     addNavigationHelpers
 } from 'react-navigation';
 
-import SplashScreen from '../scenes/splash';
-import WelcomeScreen from '../scenes/welcome';
-import AuthScreen from '../scenes/auth';
-import EmailLoginScreen from '../scenes/emaillogin';
-import PhoneLoginScreen from '../scenes/phonelogin';
-import PhoneCodeScreen from '../scenes/phonecode';
-import ForgotScreen from '../scenes/forgot';
-import EmailSignupScreen from '../scenes/emailsignup';
-import PhoneSignupScreen from '../scenes/phonesignup';
-import TabScreen from '../scenes/tab';
-import HomeScreen from '../scenes/home';
-import DetailScreen from '../scenes/detail';
-import ScheduleScreen from '../scenes/schedule';
-import PaymentScreen from '../scenes/payment';
-import AddCreditCardScreen from '../scenes/addcreditcard';
-import ShareScreen from '../scenes/share';
-import SavedScreen from '../scenes/saved';
-import ProfileScreen from '../scenes/profile';
-import EditProfileScreen from '../scenes/editprofile';
-import CreditcardListScreen from '../scenes/creditcardlist';
-import CreditDetailScreen from '../scenes/creditdetail';
-import ReservationDetailScreen from '../scenes/reservationdetail';
+import WelcomeScreen from '../scenes/welcome/';
+import LoginScreen from '../scenes/login/';
+import EmailLoginScreen from '../scenes/emaillogin/';
+import PhoneLoginScreen from '../scenes/phonelogin/';
+import EnterCodeScreen from '../scenes/entercode/';
+import ForgotScreen from '../scenes/forgot/';
+import InterestScreen from '../scenes/interest/';
+import PhoneSignupScreen from '../scenes/phonesignup/';
+import EmailSignupScreen from '../scenes/emailsignup/';
+import TabScreen from '../scenes/tab/';
+import DetailScreen from '../scenes/detail/';
+import ScheduleViewScreen from '../scenes/scheduleview/';
+import PaymentScreen from '../scenes/payment/';
+import AddCreditScreen from '../scenes/addcredit/';
+import ShareScreen from '../scenes/share/';
+import PaymentMethodScreen from '../scenes/paymentmethod/';
+import CreditDetailScreen from '../scenes/creditdetail/';
+import EditProfileScreen from '../scenes/editprofile/';
+import ReservationDetailScreen from '../scenes/reservationdetail/';
+import ChangePasswordScreen from '../scenes/changepassword/';
 
 export const AppNavigator = StackNavigator({
-    splash: { screen: SplashScreen },
-    welcome: { screen: WelcomeScreen },
-    auth: { screen: AuthScreen },
-    emaillogin: { screen: EmailLoginScreen },
-    phonelogin: { screen: PhoneLoginScreen },
-    phonecode: { screen: PhoneCodeScreen },
-    forgot: { screen: ForgotScreen },
-    emailsignup: { screen: EmailSignupScreen },
-    phonesignup: { screen: PhoneSignupScreen },
-    tab: { screen: TabScreen },
-    home: { screen: HomeScreen },
-    detail: { screen: DetailScreen },
-    schedule: { screen: ScheduleScreen },
-    payment: { screen: PaymentScreen },
-    addcreditcard: { screen: AddCreditCardScreen },
-    share: { screen: ShareScreen },
-    saved: { screen: SavedScreen },
-    profile: { screen: ProfileScreen },
-    editprofile: { screen: EditProfileScreen },
-    creditcardlist: { screen: CreditcardListScreen },
-    creditdetail: { screen: CreditDetailScreen },
-    reservationdetail: { screen: ReservationDetailScreen }
+    Login: { screen: LoginScreen },
+    Welcome: { screen: WelcomeScreen },
+    EmailLogin: { screen: EmailLoginScreen },
+    PhoneLogin: { screen: PhoneLoginScreen },
+    EnterCode: { screen: EnterCodeScreen },
+    Forgot: { screen: ForgotScreen },
+    Interest: { screen: InterestScreen },
+    PhoneSignup: { screen: PhoneSignupScreen },
+    EmailSignup: { screen: EmailSignupScreen },
+    Tab: { screen: TabScreen },
+    Detail: { screen: DetailScreen },
+    ScheduleView: { screen: ScheduleViewScreen },
+    AddCredit: { screen: AddCreditScreen },
+    Payment: { screen: PaymentScreen },
+    Share: { screen: ShareScreen },
+    PaymentMethod: { screen: PaymentMethodScreen },
+    CreditDetail: { screen: CreditDetailScreen },
+    EditProfile: { screen: EditProfileScreen },
+    ReservationDetail: { screen: ReservationDetailScreen },
+    ChangePassword: { screen: ChangePasswordScreen }
 });
 
 const AppWithNavigationState = ({dispatch, nav}) => (
-    <AppNavigator navigation={addNavigationHelpers({dispatch, state: nav})}/>
+    <AppNavigator navigation={addNavigationHelpers({dispatch, state: nav})} />
 );
 
 const mapStateToProps = state => ({

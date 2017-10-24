@@ -1,7 +1,7 @@
 import { NavigationActions } from 'react-navigation';
 import { AppNavigator } from '../navigators/AppNavigator';
 
-const firstAction = AppNavigator.router.getActionForPathAndParams('splash');
+const firstAction = AppNavigator.router.getActionForPathAndParams('Welcome');
 const initialNavState = AppNavigator.router.getStateForAction(firstAction);
 
 function nav(state = initialNavState, action){

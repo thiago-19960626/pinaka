@@ -1,7 +1,6 @@
 import { Dimensions } from 'react-native';
-const { width, height } = Dimensions.get('window');
+const { width, height }  = Dimensions.get('window');
 import { Colors } from '../../constants';
-
 
 export default {
     container: {
@@ -10,98 +9,91 @@ export default {
 
     header: {
         backgroundColor: 'transparent',
-        elevation: 0
+        borderBottomWidth: 0
     },
 
-    headerIcon: {
-        color: 'white'
+    backBtnIcon: {
+        width: 25,
+        height: 25
     },
 
-    headerBtnText: {
-        color: 'white',
-        fontFamily: 'Roboto',
-        fontWeight: 'normal'
+    signupBtnText: {
+        fontSize: 17,
+        color: '#fff',
+        fontFamily: 'SanFranciscoText-Regular'
     },
 
-    title: {
-        color: 'white',
-        fontFamily: 'Roboto',
-        fontWeight: 'medium',
-        fontSize: 20,
-        lineHeight: 28
+    content: {
+        paddingLeft: 32,
+        paddingRight: 32
     },
 
-    text: {
-        fontFamily: 'Roboto',
-        fontWeight: 'medium',
-        fontSize: 18,
+    loginText: {
+        marginTop: 24,
         textAlign: 'center',
-        color: 'white',
-        marginTop: 20
+        fontSize: 28,
+        color: '#fff',
+        fontFamily: 'SanFranciscoText-Bold'
     },
 
-    formContainer: {
-        marginTop: 35,
-        marginLeft: 16,
-        marginRight: 16
+    descText: {
+        marginTop: 8,
+        textAlign: 'center',
+        fontSize: 17,
+        color: '#fff',
+        fontFamily: 'SanFranciscoText-Regular'
+    },
+
+    form: {
+        marginTop: 32
     },
 
     formItem: {
         marginLeft: 0,
-        marginTop: 17,
+        marginBottom: 16,
+        borderBottomWidth: 1,
+        borderBottomColor: 'rgba(255,255,255,0.5)',
         position: 'relative'
     },
 
-    formItemLabel: {
-        fontFamily: 'Roboto',
-        fontWeight: 'normal',
-        fontSize: 12,
-        color: 'white',
+    formLabel: {
         paddingTop: 0,
-        paddingRight: 0,
-        paddingLeft: 0,
-        paddingBottom: 0,
-        top: 0,
-        opacity: 0.65
+        marginBottom: 8,
+        fontSize: 14,
+        fontFamily: 'SanFranciscoText-Regular',
+        color: '#fff'
     },
 
     formInput: {
-        height: 45,
-        paddingRight: 0,
-        fontFamily: 'Roboto',
-        fontWeight: 'normal',
-        fontSize: 16,
-        color: 'white'
+        height: 48,
+        color: '#fff',
+        fontFamily: 'SanFranciscoText-Regular',
+        fontSize: 17
     },
 
-    forgotText: {
+    forgotBtn: {
         position: 'absolute',
         right: 0,
         top: 0,
+        fontFamily: 'SanFranciscoText-Regular',
         fontSize: 14,
-        color: '#ffa958',
-        paddingTop: 0,
-        paddingRight: 0
+        color: 'rgb(255,169,88)'
     },
 
     loginBtn: {
-        marginTop: 32,
-        height: 48,
-        width: width - 48,
+        marginTop: 36,
+        height: 57,
         borderRadius: 100,
-        marginLeft: 24,
-        paddingLeft: 0,
-        paddingRight: 0,
-        paddingTop: 0,
-        paddingBottom: 0,
-        backgroundColor: '#ffa958',
+        backgroundColor: 'rgb(255,169,88)',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        marginLeft: 16,
+        marginRight: 16
     },
 
     loginBtnText: {
-        fontFamily: 'Roboto',
-        fontWeight: 'medium',
-        color: 'white'
+        color: '#fff',
+        fontSize: 20,
+        fontFamily: 'SanFranciscoText-Medium'
     }
 }

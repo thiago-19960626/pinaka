@@ -1,5 +1,5 @@
 import { Dimensions } from 'react-native';
-const { width, height } = Dimensions.get('window');
+const { width, height }  = Dimensions.get('window');
 import { Colors } from '../../constants';
 
 export default {
@@ -9,93 +9,76 @@ export default {
 
     header: {
         backgroundColor: 'transparent',
-        elevation: 0
+        borderBottomWidth: 0
     },
 
-    headerIcon: {
-        color: 'white'
+    backBtnIcon: {
+        width: 25,
+        height: 25
     },
 
-    headerBtnText: {
-        color: 'white',
-        fontFamily: 'Roboto',
-        fontWeight: 'normal'
+    content: {
+        paddingLeft: 32,
+        paddingRight: 32
     },
 
-    title: {
-        color: 'white',
-        fontFamily: 'Roboto',
-        fontWeight: 'medium',
-        fontSize: 20,
-        lineHeight: 28,
-        textAlign: 'left'
+    loginText: {
+        marginTop: 24,
+        textAlign: 'center',
+        fontSize: 28,
+        color: '#fff',
+        fontFamily: 'SanFranciscoText-Bold'
     },
 
-    headerLeft: {
-        flex: 0.2
+    descText: {
+        marginTop: 8,
+        textAlign: 'center',
+        fontSize: 17,
+        color: '#fff',
+        fontFamily: 'SanFranciscoText-Regular'
     },
 
-    text: {
-        fontFamily: 'Roboto',
-        fontWeight: 'medium',
-        fontSize: 18,
-        color: 'white',
-        marginTop: 20,
-        textAlign: 'center'
-    },
-
-    formContainer: {
-        marginTop: 32,
-        marginLeft: 16,
-        marginRight: 16
-    },
-
-    formItemContainer: {
-        marginLeft: 0
-    },
-
-    formItemLabel: {
-        fontFamily: 'Roboto',
-        fontWeight: 'normal',
-        fontSize: 12,
-        color: 'white',
-        top: 0,
-        paddingLeft: 0,
-        paddingRight: 0,
-        paddingTop: 0,
-        paddingBottom: 0,
-        opacity: 0.65
-    },
-
-    formInput: {
-        height: 45,
-        paddingRight: 0,
-        fontFamily: 'Roboto',
-        fontWeight: 'normal',
-        fontSize: 16,
-        color: 'white'
-    },
-
-    sendBtn: {
-        marginLeft: 24,
-        marginRight: 24,
-        width: width -  48,
-        height: 48,
-        backgroundColor: '#ffa958',
-        borderRadius: 100,
-        alignItems: 'center',
-        justifyContent: 'center',
-        paddingLeft: 0,
-        paddingRight: 0,
-        paddingTop: 0,
-        paddingBottom: 0,
+    form: {
         marginTop: 32
     },
 
-    sendBtnText: {
-        fontFamily: 'Roboto',
-        fontWeight: 'medium',
-        fontSize: 18,
-        color: 'white'
+    formItem: {
+        marginLeft: 0,
+        marginBottom: 16,
+        borderBottomWidth: 1,
+        borderBottomColor: 'rgba(255,255,255,0.5)',
+        position: 'relative'
+    },
+
+    formLabel: {
+        paddingTop: 0,
+        marginBottom: 8,
+        fontSize: 14,
+        fontFamily: 'SanFranciscoText-Regular',
+        color: '#fff'
+    },
+
+    formInput: {
+        height: 48,
+        color: '#fff',
+        fontFamily: 'SanFranciscoText-Regular'
+    },
+
+    nextBtn: {
+        marginTop: 124,
+        marginLeft: 16,
+        marginRight: 16,
+        height: 57,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'rgb(255,169,88)',
+        borderRadius: 100
+    },
+
+    nextBtnText: {
+        fontSize: 20,
+        textAlign: 'center',
+        color: '#fff',
+        fontFamily: 'SanFranciscoText-Medium'
     }
-}
+};

@@ -4,18 +4,21 @@ import {
     Container,
     Content,
     Body,
-    List,
-    ListItem,
     Button,
-    Text,
-    Label,
-    Input,
+    Title,
     Thumbnail,
     Header,
+    Label,
+    Left,
+    Form,
+    Input,
     View,
     Icon,
     Grid,
-    Col
+    Col,
+    Text,
+    List,
+    ListItem
 } from 'native-base';
 import { NavigationActions } from 'react-navigation';
 import styles from './styles';
@@ -26,8 +29,8 @@ import moment from 'moment';
 
 class HomeScreen extends Component{
     static navigationOptions = {
-        header: null
-    }
+        header:  null
+    };
 
     constructor(props){
         super(props);
@@ -78,7 +81,7 @@ class HomeScreen extends Component{
 
     onDetail(feed){
         var { dispatch } = this.props;
-        dispatch(NavigationActions.navigate({routeName: 'detail', params: { feed: feed }}));
+        dispatch(NavigationActions.navigate({routeName: 'Detail', params: { feed: feed }}));
     }
 
     onSave(index){
@@ -129,6 +132,7 @@ class HomeScreen extends Component{
     }
 
     render(){
+        console.log(this.props.feedlist);
         StatusBar.setBarStyle('light-content');
         return (
             <Container style={styles.container}>
@@ -165,37 +169,41 @@ class HomeScreen extends Component{
                         </Grid>
                     </Body>
                 </Header>
-                <Content style={styles.content}
+                <Content 
+                    style={styles.content}
                     refreshControl={
                         <RefreshControl
                             refreshing={this.state.refreshing}
                             onRefresh={this.onRefresh.bind(this)}
                         />
-                    }>
+                    }
+                    >
                     <List>
                         {this.props.feedlist.map((feed, index) => {
                             return (
                                 <ListItem style={styles.listItem} onPress={() => this.onDetail(feed)} key={index}>
                                     <Body>
                                         <Thumbnail square source={{uri: API.SERVER + feed.image}} style={styles.itemImage}>
-                                            <View style={styles.discountContainer}>
-                                                <Text style={styles.discountPercent}>{feed.discount_percentage}%</Text>
-                                                <Text style={styles.discountText}>OFF</Text>
+                                            <View style={styles.disccountContainer}>
+                                                <Text style={styles.disccountPercent}>{feed.discount_percentage}%</Text>
+                                                <Text style={styles.disccountText}>OFF</Text>
                                             </View>
                                             <Button transparent style={styles.saveBtn} onPress={() => this.onSave(index)}>
                                                 {feed.isSaved == null?
-                                                <Thumbnail  style={styles.saveBtnIcon} square source={require('../../assets/ic_favorite.png')}/>:
-                                                <Thumbnail  style={styles.saveBtnIcon} square source={require('../../assets/ic_favorite_active.png')}/>
+                                                <Thumbnail style={styles.saveBtnIcon} square source={require('../../assets/home/icFavorite.png')}/>:
+                                                <Thumbnail style={styles.saveBtnIcon} square source={require('../../assets/saved/icFavoriteActive.png')}/>
                                                 }
                                             </Button>
                                         </Thumbnail>
                                         <View style={styles.itemPriceContainer}>
                                             <Text style={styles.itemPriceText1}>{feed.heading}</Text>
                                             <Text style={styles.itemPriceText1}>
-                                                <Text style={styles.itemPriceText2}>${feed.original_cost.toFixed(2)}</Text>   ${feed.discounted_cost.toFixed(2)}                                      
+                                                <Text style={styles.itemDiscount}>
+                                                    ${feed.original_cost.toFixed(2)}
+                                                </Text>  ${feed.discounted_cost.toFixed(2)}                                      
                                             </Text>
                                         </View>
-                                        <Text style={styles.itemTimeText}>{this.showEstimate(feed.expired_date)}</Text>
+                                        <Text style={styles.itemEstimatedTime}>{this.showEstimate(feed.expired_date)}</Text>
                                     </Body>
                                 </ListItem>
                             );

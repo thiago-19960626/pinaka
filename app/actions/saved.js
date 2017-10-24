@@ -9,7 +9,7 @@ function savedFeed(token, feed_id){
         fetch(API.SERVER_DEV_URL + 'saved', {
             method: 'POST',
             headers: {
-                'Content-Type': 'multipart/form-data'
+                'Content-Type': 'application/json'
             },
             body: formData
         })
@@ -34,7 +34,7 @@ function unSavedFeed(token, feed_id){
         fetch(API.SERVER_DEV_URL + 'saved', {
             method: 'DELETE',
             headers: {
-                'Content-Type': 'multipart/form-data'
+                'Content-Type': 'application/json'
             },
             body: formData
         })
@@ -55,7 +55,7 @@ function getSavedList(token){
         fetch(API.SERVER_DEV_URL + 'saved?token=' + token, {
             method: 'GET',
             headers: {
-                'Content-Type': 'multipart/form-data'
+                'Content-Type': 'application/json'
             }
         })
         .then((res) => res.json())

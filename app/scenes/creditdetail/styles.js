@@ -1,128 +1,126 @@
 import { Dimensions } from 'react-native';
-const { width, height } = Dimensions.get('window');
+const { width, height }  = Dimensions.get('window');
 import { Colors } from '../../constants';
 
 export default {
     container: {
-        backgroundColor: Colors.main
+        backgroundColor: Colors.main,
     },
 
     header: {
         backgroundColor: 'transparent',
-        elevation: 0
+        borderBottomWidth: 0
     },
 
-    headerIcon: {
-        color: 'white'
+    IconContainer: {
+        flex: 0.1
     },
 
-    title: {
-        color: 'white',
-        fontFamily: 'Roboto',
-        fontWeight: 'medium',
-        fontSize: 20,
-        lineHeight: 28
+    headerTitle: {
+        color: '#fff',
+        fontSize: 17,
+        fontFamily: 'SanFranciscoText-Bold'
     },
 
-    headerLeft: {
-        flex: 0.2
+    backBtnIcon: {
+        width: 25,
+        height: 25
     },
 
     content: {
-        backgroundColor: 'white',
-        paddingLeft: 16,
-        paddingRight: 16,
-        paddingTop: 4
-    },
-
-    fieldText: {
-        fontFamily: 'Roboto',
-        fontWeight: 'normal',
-        fontSize: 12,
-        color: '#9b9ba8',
-        marginTop: 16
-    },
-
-    numberContainer: {
-        flexDirection: 'row',
-        marginTop: 8,
-        marginBottom: 8
-    },
-
-    icon: {
-        width: 32,
-        height: 22
+        paddingLeft: 20,
+        paddingRight: 20,
+        paddingTop: 24,
+        backgroundColor: '#fff'
     },
 
     numberText: {
-        fontFamily: 'Roboto',
-        fontWeight: 'normal',
-        fontSize: 16,
-        color: 'black',
-        marginLeft: 16
+        fontSize: 14,
+        fontFamily: 'SanFranciscoText-Regular',
+        color: '#000'
     },
 
-    divider: {
-        height: 1,
-        width: width - 32,
-        backgroundColor: '#dddde1'
-    },
-
-    expiredText: {
-        fontFamily: 'Roboto',
-        fontWeight: 'normal',
-        fontSize: 16,
-        color: 'black',
-        marginTop: 8,
-        marginBottom: 8
-    },
-
-    btnContainer: {
+    numberContainer: {
+        height: 57,
         flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginTop: 32
+        alignItems: 'center',
+        borderBottomWidth: 1,
+        borderBottomColor: 'rgb(221,221,225)'
     },
 
-    btnWrapper: {
-        width: ( width -  48 ) /2
+    cardIcon: {
+        width: 32,
+        height: 22,
+        marginRight: 16
     },
 
+    cardNumberText: {
+        fontSize: 17,
+        fontFamily: 'SanFranciscoText-Regular',
+        color: '#000'
+    },
+
+    expiredDateText: {
+        marginTop: 16,
+        fontSize: 14,
+        fontFamily: 'SanFranciscoText-Regular',
+        color: '#000'
+    },
+
+    expiredDateContainer: {
+        height: 57,
+        borderBottomWidth: 1,
+        borderBottomColor: 'rgb(221,221,225)',
+        justifyContent: 'center'
+    },
+
+    expiredDateText1: {
+        fontSize: 17,
+        fontFamily: 'SanFranciscoText-Regular',
+        color: '#000'
+    },
+
+    footer: {
+        height: 89,
+        paddingLeft: 12,
+        paddingRight: 12,
+        paddingBottom: 32,
+        borderTopWidth: 0
+    },
 
     deleteBtn: {
-        width: (width -  48) / 2,
-        height: 48,
+        height: 57,
         borderRadius: 100,
-        borderWidth: 0.6,
-        borderColor: 'black',
         backgroundColor: 'transparent',
+        borderWidth: 1,
+        borderColor: '#000',
+        marginLeft: 8,
+        marginRight: 8,
         alignItems: 'center',
-        justifyContent: 'center',
-        elevation: 0
+        justifyContent: 'center'
     },
 
     deleteBtnText: {
-        fontFamily: 'Roboto',
-        fontWeight: 'normal',
-        fontSize: 18,
-        color: 'black'
+        fontSize: 20,
+        fontFamily: 'SanFranciscoText-Regular',
+        color: '#000'
     },
 
     editBtn: {
-        width: (width -  48) / 2,
-        height: 48,
+        height: 57,
         borderRadius: 100,
-        borderWidth: 0.6,
-        borderColor: '#e636a6',
-        backgroundColor: '#e636a6',
+        backgroundColor: 'rgb(230,54,166)',
+        borderWidth: 1,
+        borderColor: 'rgb(230,54,166)',
+        marginLeft: 8,
+        marginRight: 8,
         alignItems: 'center',
-        justifyContent: 'center',
-        elevation: 0
+        justifyContent: 'center'
     },
 
     editBtnText: {
-        fontFamily: 'Roboto',
-        fontWeight: 'normal',
-        fontSize: 18,
-        color: 'white'
+        fontSize: 20,
+        fontFamily: 'SanFranciscoText-Regular',
+        color: '#fff'
     }
 }

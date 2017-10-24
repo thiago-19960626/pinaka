@@ -9,7 +9,7 @@ function emailLogin(email, password){
         fetch(API.SERVER_DEV_URL + 'user/login', {
             method: 'POST',
             headers: {
-                'Content-Type': 'multipart/form-data'
+                'Content-Type': 'application/json'
             },
             body: formData
         })
@@ -47,7 +47,7 @@ function emailSignup(params){
         fetch(API.SERVER_DEV_URL + 'user/signup', {
             method: "POST",
             headers: {
-                'Content-Type': 'multipart/form-data'
+                'Content-Type': 'application/json'
             },
             body: formData
         })
@@ -71,7 +71,7 @@ function sendCode(phone){
         fetch(API.SERVER_DEV_URL + 'user/sendcode', {
             method: 'POST',
             headers: {
-                'Content-Type': 'multipart/form-data'
+                'Content-Type': 'application/json'
             },
             body: formData
         })
@@ -96,7 +96,7 @@ function verifyCode(token, code){
         fetch(API.SERVER_DEV_URL + 'user/verifycode', {
             method: 'POST',
             headers: {
-                'Content-Type': 'multipart/form-data'
+                'Content-Type': 'application/json'
             },
             body: formData
         })
@@ -121,7 +121,7 @@ function loginCode(token, code){
         fetch(API.SERVER_DEV_URL + 'user/logincode', {
             method: 'POST',
             headers: {
-                'Content-Type': 'multipart/form-data'
+                'Content-Type': 'application/json'
             },
             body: formData
         })
@@ -142,7 +142,7 @@ function getProfile(token){
         fetch(API.SERVER_DEV_URL + 'user/profile?token=' + token, {
             method: 'GET',
             headers: {
-                'Content-Type': 'multipart/form-data'
+                'Content-Type': 'application/json'
             }
         })
         .then((res) => res.json())
@@ -173,7 +173,7 @@ function updateProfile(token, params){
         fetch(API.SERVER_DEV_URL + 'user/update', {
             method: 'PUT',
             headers: {
-                'Content-Type':'multipart/form-data'
+                'Content-Type':'application/json'
             },
             body: formData
         })
@@ -198,7 +198,7 @@ function changePassword(token, password){
         fetch(API.SERVER_DEV_URL + 'user/update', {
             method: 'PUT',
             headers: {
-                'Content-Type':'multipart/form-data'
+                'Content-Type':'application/json'
             },
             body: formData
         })
@@ -222,7 +222,7 @@ function forgot(email){
         fetch(API.SERVER_DEV_URL + 'user/forgot',{
             method: 'POST',
             headers: {
-                'Content-Type': 'multipart/form-data'
+                'Content-Type': 'application/json'
             },
             body: formData
         })        

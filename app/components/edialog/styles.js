@@ -11,8 +11,7 @@ export default {
     text1: {
         fontSize: 14,
         color: 'white',
-        fontFamily: 'Roboto',
-        fontWeight: 'normal',
+        fontFamily: 'SanFranciscoText-Regular',
         margin: 0,
         padding: 0
     },

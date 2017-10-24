@@ -2,28 +2,28 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
     Container,
+    Header,
     Content,
     Footer,
-    Grid,
-    Col,
-    View,
     Button,
     Thumbnail,
-    Text
+    Text,
+    View,
+    Grid,
+    Col
 } from 'native-base';
 import { NavigationActions } from 'react-navigation';
 import styles from './styles';
 import { StatusBar } from 'react-native';
 
-import HomeScreen from '../home';
-import SavedScreen from '../saved';
-import ReservationScreen from '../reservation';
-import ProfileScreen from '../profile';
-import SettingScreen from '../setting';
-
+import HomeScreen from '../home/';
+import SavedScreen from '../saved/';
+import ReservationScreen from '../reservations/';
+import ProfileScreen from '../profile/';
+import SettingScreen from '../settings/';
 
 class TabScreen extends Component{
-    static navigationOptions ={
+    static navigationOptions = {
         header: null
     };
 
@@ -31,13 +31,13 @@ class TabScreen extends Component{
         super(props);
 
         this.state = {
-            tabIndex: 0
-        }
+            selectedTab: 0
+        };
     }
 
-    onSelectTab(index){
+    onSelectedTab(index){
         this.setState({
-            tabIndex: index
+            selectedTab: index
         });
     }
 
@@ -45,93 +45,104 @@ class TabScreen extends Component{
         StatusBar.setBarStyle('light-content');
         return (
             <Container style={styles.container}>
-                {this.state.tabIndex == 0?
+                {this.state.selectedTab == 0?
                 <HomeScreen/>: null}
-                {this.state.tabIndex == 1?
+                {this.state.selectedTab == 1?
                 <SavedScreen/>: null}
-                {this.state.tabIndex == 2?
-                <ReservationScreen/>:null}
-                {this.state.tabIndex == 3?
-                <ProfileScreen/>:null}
-                {this.state.tabIndex == 4?
+                {this.state.selectedTab == 2?
+                <ReservationScreen/>: null}
+                {this.state.selectedTab == 3?
+                <ProfileScreen/>: null}
+                {this.state.selectedTab == 4?
                 <SettingScreen/>:null}
-                <Footer style={styles.footer}>
+                <Footer>
                     <Grid>
                         <Col style={styles.tabItem}>
                             <View style={styles.tabItemContainer}>
-                                <Button transparent style={styles.tabItemBtn} onPress={() => this.onSelectTab(0)}>
-                                    <View style={styles.tabItemBtnContainer}>
-                                        {this.state.tabIndex == 0?
-                                        <Thumbnail square source={require('../../assets/ic_tab_home_selected.png')} style={styles.tabBtnHomeIcon}/>:
-                                        <Thumbnail square source={require('../../assets/ic_tab_home_normal.png')} style={styles.tabBtnHomeIcon}/>
+                                <Button transparent style={styles.tabItemBtn} onPress={() => this.onSelectedTab(0)}>
+                                    <View style={styles.tabBtnWrapper}>
+                                        {this.state.selectedTab == 0?                                        
+                                        <Thumbnail square source={require('../../assets/tab/icTabHomeSelected.png')} style={styles.tabBtnIcon}/>:
+                                        <Thumbnail square source={require('../../assets/tab/icTabHomeNormal.png')} style={styles.tabBtnIcon}/>
                                         }
-                                        {this.state.tabIndex == 0?
-                                        <Text style={styles.tabItemBtnText}>Home</Text>:null}
+                                        {this.state.selectedTab == 0?
+                                        <Text style={styles.tabBtnActiveText}>Home</Text>:
+                                        <Text style={styles.tabBtnText}>Home</Text>
+                                        }
                                     </View>
                                 </Button>
                             </View>
                         </Col>
                         <Col style={styles.tabItem}>
                             <View style={styles.tabItemContainer}>
-                                <Button transparent style={styles.tabItemBtn} onPress={() => this.onSelectTab(1)}>
-                                    <View style={styles.tabItemBtnContainer}>
-                                        {this.state.tabIndex == 1?
-                                        <Thumbnail square source={require('../../assets/ic_tab_saved_selected.png')} style={styles.tabBtnSavedIcon}/>:
-                                        <Thumbnail square source={require('../../assets/ic_tab_saved_normal.png')} style={styles.tabBtnSavedIcon}/>
+                                <Button transparent style={styles.tabItemBtn} onPress={() => this.onSelectedTab(1)}>
+                                    <View style={styles.tabBtnWrapper}>
+                                        {this.state.selectedTab == 1?
+                                        <Thumbnail square source={require('../../assets/tab/icTabSavedSelected.png')} style={styles.tabBtnIcon}/>:
+                                        <Thumbnail square source={require('../../assets/tab/icTabSavedNormal.png')} style={styles.tabBtnIcon}/>                                        
                                         }
-                                        {this.state.tabIndex == 1?
-                                        <Text style={styles.tabItemBtnText}>Saved</Text>:null}    
+                                        {this.state.selectedTab == 1?
+                                        <Text style={styles.tabBtnActiveText}>Saved</Text>:
+                                        <Text style={styles.tabBtnText}>Saved</Text>
+                                        }
+                                    </View>
+                                </Button>
+                            </View>
+                        </Col>
+                        <Col style={styles.tabItem}>
+                            <View style={styles.tabItemBtn}>
+                                <Button transparent style={styles.tabItemBtn} onPress={() => this.onSelectedTab(2)}>
+                                    <View style={styles.tabBtnWrapper}>
+                                        {this.state.selectedTab == 2?
+                                        <Thumbnail square source={require('../../assets/tab/icTabReservationsSelected.png')} style={styles.tabBtnIcon}/>:
+                                        <Thumbnail square source={require('../../assets/tab/icTabReservationsNormal.png')} style={styles.tabBtnIcon}/>                                        
+                                        }
+                                        {this.state.selectedTab == 2?
+                                        <Text style={styles.tabBtnActiveText}>Reservations</Text>:
+                                        <Text style={styles.tabBtnText}>Reservations</Text>
+                                        }
                                     </View>
                                 </Button>
                             </View>
                         </Col>
                         <Col style={styles.tabItem}>
                             <View style={styles.tabItemContainer}>
-                                <Button transparent style={styles.tabItemBtn} onPress={() => this.onSelectTab(2)}>
-                                    <View style={styles.tabItemBtnContainer}>
-                                        {this.state.tabIndex == 2?
-                                        <Thumbnail square source={require('../../assets/ic_tab_reservations_selected.png')} style={styles.tabBtnReservationIcon}/>:
-                                        <Thumbnail square source={require('../../assets/ic_tab_reservations_normal.png')} style={styles.tabBtnReservationIcon}/>
+                                <Button transparent style={styles.tabItemBtn} onPress={() => this.onSelectedTab(3)}>
+                                    <View style={styles.tabBtnWrapper}>
+                                        {this.state.selectedTab == 3?
+                                        <Thumbnail square source={require('../../assets/tab/icTabProfileSelected.png')} style={styles.tabBtnIcon}/>:
+                                        <Thumbnail square source={require('../../assets/tab/icTabProfileNormal.png')} style={styles.tabBtnIcon}/>                                        
                                         }
-                                        {this.state.tabIndex == 2?
-                                        <Text style={styles.tabItemBtnText}>Reservations</Text>:null} 
+                                        {this.state.selectedTab == 3?
+                                        <Text style={styles.tabBtnActiveText}>Profile</Text>:
+                                        <Text style={styles.tabBtnText}>Profile</Text>
+                                        }
                                     </View>
                                 </Button>
                             </View>
                         </Col>
                         <Col style={styles.tabItem}>
                             <View style={styles.tabItemContainer}>
-                                <Button transparent style={styles.tabItemBtn} onPress={() => this.onSelectTab(3)}>
-                                    <View style={styles.tabItemBtnContainer}>
-                                        {this.state.tabIndex == 3?
-                                        <Thumbnail square source={require('../../assets/ic_tab_profile_selected.png')} style={styles.tabBtnProfileIcon}/>:
-                                        <Thumbnail square source={require('../../assets/ic_tab_profile_normal.png')} style={styles.tabBtnProfileIcon}/>
+                                <Button transparent style={styles.tabItemBtn} onPress={() => this.onSelectedTab(4)}>
+                                    <View style={styles.tabBtnWrapper}>
+                                        {this.state.selectedTab == 4?
+                                        <Thumbnail square source={require('../../assets/tab/icTabSettingsSelected.png')} style={styles.tabBtnIcon}/>:
+                                        <Thumbnail square source={require('../../assets/tab/icTabSettingsNormal.png')} style={styles.tabBtnIcon}/>                                        
                                         }
-                                        {this.state.tabIndex == 3?
-                                        <Text style={styles.tabItemBtnText}>Profile</Text>:null}
+                                        {this.state.selectedTab == 4?
+                                        <Text style={styles.tabBtnActiveText}>Settings</Text>:
+                                        <Text style={styles.tabBtnText}>Settings</Text>
+                                        }
                                     </View>
                                 </Button>
                             </View>
                         </Col>
-                        <Col style={styles.tabItem}>
-                            <View style={styles.tabItemContainer}>
-                                <Button transparent style={styles.tabItemBtn} onPress={() => this.onSelectTab(4)}>
-                                    <View style={styles.tabItemBtnContainer}>
-                                        {this.state.tabIndex == 4?
-                                        <Thumbnail square source={require('../../assets/ic_tab_settings_selected.png')} style={styles.tabBtnSettingIcon}/>:
-                                        <Thumbnail square source={require('../../assets/ic_tab_settings_normal.png')} style={styles.tabBtnSettingIcon}/>
-                                        }
-                                        {this.state.tabIndex == 4?
-                                        <Text style={styles.tabItemBtnText}>Settings</Text>:null}
-                                    </View>
-                                </Button>
-                            </View>
-                        </Col>
-                    </Grid>
+                    </Grid>                    
                 </Footer>
             </Container>
         );
     }
 }
+
 
 export default connect()(TabScreen);

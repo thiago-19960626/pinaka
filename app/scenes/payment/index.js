@@ -9,22 +9,23 @@ import {
     Title,
     Thumbnail,
     Header,
+    Left,
+    Form,
     Item,
     Label,
-    Left,
-    Right,
     View,
+    Grid,
+    Col,
     List,
     ListItem,
-    Footer,
     Icon,
-    Radio,
-    Grid,
-    Col
+    Right,
+    CheckBox,
+    Footer
 } from 'native-base';
 import { NavigationActions } from 'react-navigation';
 import styles from './styles';
-import { StatusBar, ScrollView } from 'react-native';
+import { StatusBar } from 'react-native';
 import { API } from '../../constants';
 import PLoading from '../../components/loading';
 import { createReservation } from '../../actions';
@@ -34,7 +35,7 @@ import EDialog from '../../components/edialog';
 class PaymentScreen extends Component{
     static navigationOptions = {
         header: null
-    }
+    };
 
     constructor(props){
         super(props);
@@ -56,7 +57,7 @@ class PaymentScreen extends Component{
 
     onAddCredit(){
         var { dispatch } = this.props;
-        dispatch(NavigationActions.navigate({routeName: 'addcreditcard', params: {action: 'add'}}));
+        dispatch(NavigationActions.navigate({routeName: 'AddCredit', params: {action: 'add'}}));
     }
 
     onCalPeople(delta){
@@ -124,7 +125,7 @@ class PaymentScreen extends Component{
                     var reservationDATA = JSON.parse(JSON.stringify(data));
                     reservationDATA['feed_id'] = this.props.navigation.state.params.feed;
                     console.log(reservationDATA);
-                    dispatch(NavigationActions.navigate({routeName: 'reservationdetail', params: { reservation: reservationDATA }}));
+                    dispatch(NavigationActions.navigate({routeName: 'ReservationDetail', params: { reservation: reservationDATA }}));
                 }                
             })
             .catch(err => {
@@ -153,35 +154,31 @@ class PaymentScreen extends Component{
         });
     }
 
-    render (){
-        StatusBar.setBarStyle('light-content');
+    render(){
+        StatusBar.setBarStyle('dark-content');
         return (
             <Container style={styles.container}>
                 <Header style={styles.header}>
                     <Left>
                         <Button transparent onPress={() => this.onBack()}>
-                            <Icon name="arrow-back" style={styles.headerIcon}/>
+                            <Thumbnail square source={require('../../assets/icNavBackBlack1.png')} style={styles.backBtnIcon}/>
                         </Button>
                     </Left>
-                    <Body>
-                        <Title style={styles.title}>Booking</Title>
-                    </Body>
-                    <Right></Right>
                 </Header>
+                {this.state.isError?
+                <EDialog errorText={this.state.errorText} onClose={() => this.onErrorClose()}/>: null}
                 <Content style={styles.content}>
                     <Grid>
                         <Col style={styles.basicContainer}>
-                            <Text style={styles.nameText}>Bowling</Text>
+                            <Text style={styles.nameText}>{this.props.navigation.state.params.feed.heading}</Text>
                             <Text style={styles.locationText}>Boronia St & Anzac Parade, NSW 2033</Text>
                             <Text style={styles.phoneText}>+61 123 456 678</Text>
                         </Col>
                         <Col style={styles.imageContainer}>
-                            <Thumbnail square source={require('../../assets/1.png')} style={styles.image}/>
+                            <Thumbnail square source={{uri: API.SERVER + this.props.navigation.state.params.feed.image}} style={styles.image}/>
                         </Col>
                     </Grid>
-                    <Text style={styles.datetimeText}>
-                        Date & Time
-                    </Text>
+                    <Text style={styles.datetimeText}>Data & Time</Text>
                     <Text style={styles.dateText}>{this.showDate()}</Text>
                     {this.props.navigation.state.params.hours[0]?
                     <Text style={styles.timeText}>{API.BOOKINGTIME[0]}</Text>: null}
@@ -194,11 +191,11 @@ class PaymentScreen extends Component{
                     <List style={styles.list}>
                         <ListItem style={styles.listItem}>
                             <Body>
-                                <Text style={styles.listItemText}>Number of people</Text>
+                                <Text>Number of people</Text>
                             </Body>
                             <Right style={styles.right}>
                                 <Button transparent onPress={() => this.onCalPeople(-1)}>
-                                    <Icon name="ios-remove-circle" style={styles.listItemIcon}/>
+                                    <Icon name="remove-circle" style={styles.listItemIcon}/>
                                 </Button>
                             </Right>
                             <Right style={styles.right}>
@@ -208,17 +205,17 @@ class PaymentScreen extends Component{
                             </Right>
                             <Right style={styles.right}>
                                 <Button transparent onPress={() => this.onCalPeople(1)}>
-                                    <Icon name="ios-add-circle" style={styles.listItemIcon}/>
+                                    <Icon name="add-circle" style={styles.listItemIcon}/>
                                 </Button>
                             </Right>
                         </ListItem>
                         <ListItem style={styles.listItem}>
                             <Body>
-                                <Text style={styles.listItemText}>Bowling lines</Text>
+                                <Text>Bowling lines</Text>
                             </Body>
-                            <Right style={styles.right}>
-                                <Button transparent onPress={() => this.onCalLines(-1)}>
-                                    <Icon name="ios-remove-circle" style={styles.listItemIcon}/>
+                            <Right style={styles.right} >
+                                <Button icon transparent onPress={() => this.onCalLines(-1)}>
+                                    <Icon name="remove-circle"style={styles.listItemIcon}/>
                                 </Button>
                             </Right>
                             <Right style={styles.right}>
@@ -227,30 +224,29 @@ class PaymentScreen extends Component{
                                 </View>
                             </Right>
                             <Right style={styles.right}>
-                                <Button transparent onPress={() => this.onCalLines(1)}>
-                                    <Icon name="ios-add-circle" style={styles.listItemIcon}/>
+                                <Button icon transparent onPress={() => this.onCalLines(1)}>
+                                    <Icon name="add-circle" style={styles.listItemIcon}/>
                                 </Button>
                             </Right>
                         </ListItem>
                     </List>
-                    <Text style={styles.datetimeText}>
-                        Payment Method
-                    </Text>
+                    <Text style={styles.paymentText}>Payment Method</Text>
                     <List style={styles.list}>
                         {this.props.user.creditcards.map((card, index) => {
                             return (
-                                <ListItem style={styles.listItem} onPress={() => this.onPaymentMethod(index)} key={index}>
-                                    <Body style={styles.paymentListItemBody}>
-                                        <Thumbnail square source={require('../../assets/mastercard.png')} style={styles.paymentIcon}/>
-                                        <Text style={styles.paymentText}>{card.number}</Text>
-                                    </Body>
+                                <ListItem style={styles.listItem} onPress={() => this.onPaymentMethod(index)} key={index}>  
+                                    <Body style={styles.paymentListItemBody}>                          
+                                        <Thumbnail square source={require('../../assets/payment/mastercard.png')} style={styles.paymentIcon}/>
+                                        <Text>{card.number}</Text>
+                                    </Body>                            
                                     <Right>
-                                        <Radio selected={(this.state.paymentmethod == index)}/>
+                                        {this.state.paymentmethod == index?
+                                        <Icon name="checkmark" style={styles.checkIcon}/>: <View style={{height: 37.33}}/>}
                                     </Right>
                                 </ListItem>
                             );
                         })}
-                        <ListItem style={styles.listItem} onPress={() => this.onAddCredit()}>
+                        <ListItem style={styles.listItem} onPress={() => this.onAddCredit()}>                            
                             <Body style={styles.paymentListItemBody}>
                                 <Icon name="add-circle" style={styles.addPaymentIcon}/>
                                 <Text style={styles.addPaymentText}>Add credit card</Text>
@@ -265,12 +261,12 @@ class PaymentScreen extends Component{
                         <Text style={styles.footerLineText}>for {this.state.lines} lines</Text>
                     </View>
                     <Button style={styles.payBtn} onPress={() => this.onPay()}>
-                        <Label style={styles.payBtnText}>Pay</Label>
+                        <Text>Pay</Text>
                     </Button>
                 </Footer>
                 {this.state.isLoading?<PLoading color="white"/>:null}
             </Container>
-        );
+        )
     }
 }
 

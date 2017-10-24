@@ -4,19 +4,17 @@ import {
     Container,
     Content,
     Body,
-    Title,
-    Label,
-    Thumbnail,
-    Button,
-    Left,
-    Right,
-    Header,
-    Icon,
-    Input,
-    Form,
-    View,
     Text,
-    Item
+    Button,
+    Title,
+    Thumbnail,
+    Header,
+    Item,
+    Form,
+    Input,
+    Label,
+    Left,
+    Right
 } from 'native-base';
 import { NavigationActions } from 'react-navigation';
 import styles from './styles';
@@ -25,12 +23,11 @@ import { sendCode } from '../../actions';
 import PLoading from '../../components/loading';
 import EDialog from '../../components/edialog';
 import { API } from '../../constants/api';
-import AlertCheck from '../../components/alertcheck/';
 
 class PhoneLoginScreen extends Component{
     static navigationOptions = {
         header: null
-    }
+    };
 
     constructor(props){
         super(props);
@@ -39,8 +36,7 @@ class PhoneLoginScreen extends Component{
             phone: '',
             isError: false,
             isLoading: false,
-            errorText: "",
-            isDialog: false
+            errorText: ""
         };
     }
 
@@ -57,6 +53,7 @@ class PhoneLoginScreen extends Component{
             });
         } else {
             var { dispatch } = this.props;
+            //dispatch(NavigationActions.navigate({routeName: 'EnterCode'}));
 
             //show Indicator
             this.setState({
@@ -76,7 +73,7 @@ class PhoneLoginScreen extends Component{
                     this.setState({
                         isLoading: false                    
                     });
-                    dispatch(NavigationActions.navigate({routeName: 'phonecode', params: {token: data.token}}));
+                    dispatch(NavigationActions.navigate({routeName: 'EnterCode', params: {token: data.token}}));
                 }                
             })
             .catch(err => {
@@ -88,6 +85,11 @@ class PhoneLoginScreen extends Component{
                 });
             });
         }        
+    }
+
+    onSignup(){
+        var { dispatch } = this.props;
+        dispatch(NavigationActions.navigate({routeName: 'Interest'}));
     }
 
     onChangeText(text){
@@ -103,75 +105,44 @@ class PhoneLoginScreen extends Component{
         });
     }
 
-    onSignup(){
-        this.setState({
-            isDialog: true
-        });
-    }
-
-    onCancel(){
-        this.setState({
-            isDialog: false
-        });
-    }
-
-    onDone(ret){
-        this.setState({
-            isDialog: false
-        });
-
-        var { dispatch } = this.props;
-        dispatch(NavigationActions.navigate({routeName: 'auth', params: {type: 'signup', interest: ret}}));
-    }
-
     render(){
         StatusBar.setBarStyle('light-content');
         return (
             <Container style={styles.container}>
                 <Header style={styles.header}>
-                    <Left>
-                        <Button transparent onPress={() => this.onBack()}>
-                            <Icon name="arrow-back" style={styles.headerIcon}/>
-                        </Button>
-                    </Left>
-                    <Body>
-                        <Title style={styles.title}>Log In</Title>
-                    </Body>
-                    <Right>
-                        <Button transparent onPress={() => this.onSignup()}>
-                            <Label style={styles.headerBtnText}>Sign Up</Label>
-                        </Button>
-                    </Right>
+                        <Left>
+                            <Button transparent onPress={() => this.onBack()}>
+                                <Thumbnail square source={require('../../assets/icNavBackBlack.png')} style={styles.backBtnIcon}/>
+                            </Button>
+                        </Left>
+                        <Right>
+                            <Button transparent onPress={() => this.onSignup()}>
+                                <Text style={styles.signupBtnText}>Sign Up</Text>
+                            </Button>
+                        </Right>
                 </Header>
                 {this.state.isError?
                 <EDialog errorText={this.state.errorText} onClose={() => this.onErrorClose()}/>: null}
-                <Content>
-                    <Text style={styles.text}>
-                        Enter your phone number.
-                    </Text>
-                    <Form style={styles.formContainer}>
-                        <Item stackedLabel style={styles.formItemContainer}>
-                            <Label style={styles.formItemLabel}>
-                                NUMBER
-                            </Label>
-                            <Input style={styles.formInput} style={styles.formInput} keyboardType="numeric" value={this.state.phone} onChangeText={(text) => this.onChangeText(text)}/>
+                <Content style={styles.content}>
+                    <Text style={styles.loginText}>Log In</Text>
+                    <Text style={styles.descText}>Enter your Phone number.</Text>
+                    <Form style={styles.form}>
+                        <Item stackedLabel style={styles.formItem}>
+                            <Label style={styles.formLabel}>NUMBER</Label>
+                            <Input style={styles.formInput} keyboardType="numeric" value={this.state.phone} onChangeText={(text) => this.onChangeText(text)}/>
                         </Item>
                     </Form>
-                    <Text style={styles.descText}>Tap Next to get an SMS confirmation from Account Kit powered by Facebook. <Text style={styles.linkText}>Learn more</Text></Text>
-                    <Button style={styles.sendBtn} onPress={() => this.onNext()}>
-                        <Label style={styles.sendBtnText}>Next</Label>
+                    <Text style={styles.descText2}>
+                        Tap Next to get an SMS confirmation from Account Kit powered by Facebook. <Text style={styles.learnMoreBtn}>Learn more</Text>
+                    </Text>
+                    <Button block style={styles.loginBtn} onPress={() => this.onNext()}>
+                        <Text style={styles.loginBtnText}>Next</Text>
                     </Button>
                 </Content>
                 {this.state.isLoading?<PLoading color="white"/>:null}
-                {this.state.isDialog?
-                <AlertCheck list={this.props.interests} onCancel={() => this.onCancel()} onDone={(ret) => this.onDone(ret)}/>: null}
             </Container>
         );
     }
 }
 
-var mapStateToProps = state => ({
-    interests: state.interest.list
-})
-
-export default connect(mapStateToProps)(PhoneLoginScreen);
+export default connect()(PhoneLoginScreen);

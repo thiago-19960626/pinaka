@@ -9,7 +9,7 @@ function deleteCard(token, id){
         fetch(API.SERVER_DEV_URL + 'credit',{
             method: 'DELETE',
             headers: {
-                'Content-Type': 'multipart/form-data'
+                'Content-Type': 'application/json'
             },
             body: formData
         })
@@ -38,7 +38,7 @@ function saveCard(token, params){
         fetch(API.SERVER_DEV_URL + 'credit', {
             method: 'PUT',
             headers: {
-                'Content-Type': 'multipart/form-data'
+                'Content-Type': 'application/json'
             },
             body: formData
         })
@@ -66,7 +66,7 @@ function addCard(token, params){
         fetch(API.SERVER_DEV_URL + 'credit', {
             method: "POST",
             headers: {
-                'Content-Type': 'multipart/form-data'
+                'Content-Type': 'application/json'
             },
             body: formData
         })

@@ -1,38 +1,39 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { 
+import {
     Container,
     Content,
     Body,
+    Text,
     Button,
     Title,
     Thumbnail,
     Header,
     Left,
-    Right,
-    Icon,
-    List,
-    ListItem,
     Form,
     Item,
-    Grid,
-    Col,
-    View,
-    Text,
     Label,
+    View,
+    Grid,
+    Row,
+    Col,
+    List,
+    ListItem,
+    Icon,
+    Right,
+    CheckBox,
     Input,
-    CheckBox
+    Footer
 } from 'native-base';
 import { NavigationActions } from 'react-navigation';
 import styles from './styles';
-import { StatusBar,Dimensions } from 'react-native';
+import { StatusBar, Dimensions } from 'react-native';
+import  PDatePicker from '../../components/datepicker/';
 const { width, height } = Dimensions.get('window');
 import { updateProfile,getInterests } from '../../actions';
 import PLoading from '../../components/loading';
 import EDialog from '../../components/edialog';
 import { API } from '../../constants';
-import DatePicker from 'react-native-datepicker'
-import moment from 'moment';
 
 class EditProfileScreen extends Component{
     static navigationOptions = {
@@ -48,29 +49,40 @@ class EditProfileScreen extends Component{
             kids: props.user? (props.user.kids == 1? true: false): false,
             interests: [false, false, false, false, false, false, false, false, false],
             showDatePicker: false,
-            date: moment(props.user?new Date(props.user.birthday): new Date()).format("YYYY-MM-D"),
+            date: props.user?new Date(props.user.birthday): new Date(),
             name: props.user? props.user.name:"",
             zipcode: props.user?props.user.zipcode:"",
             email: props.user?(props.user.email?props.user.email: ""): "",
             phone: props.user?(props.user.phone?props.user.phone.substring(2, props.user.phone.length): ""): "",
             isLoading: false,
             isError: false,
-            errorText: ""
+            errorText: "",
+            interestTemplates: []
         };
 
         var interests = [];
         for (var i = 0; i < props.user.interests.length; i++){
             interests.push(props.user.interests[i].id.name);
         }
-        var temp = this.props.interests;
+        var temp = ["Laser Tag", "Arcade", "Cosmic bowling", "Kids party", "League", "Bowling", "Group event", "Adult party", "Food"];
 
         for(var i = 0; i < interests.length; i++){
             for(var j = 0; j < temp.length; j++){
-                if(interests[i] == temp[j].name){
+                if(interests[i] == temp[j]){
                     this.state.interests[j] = true;
                 }
             }
         }
+
+        getInterests()
+        .then(interests => {
+            this.setState({
+                interestTemplates: interests
+            });
+        })
+        .catch(err => {
+            alert("Please check wifi or internet.");
+        })
     }
 
     onBack(){
@@ -83,7 +95,7 @@ class EditProfileScreen extends Component{
         var newInterests = "";
         for(var i = 0; i < this.state.interests.length; i++){
             if(this.state.interests[i] == true){
-                newInterests += this.props.interests[i]._id + ",1:";
+                newInterests += this.state.interestTemplates[i]._id + ",1:";
             }
         }
         if(newInterests != ''){
@@ -114,7 +126,7 @@ class EditProfileScreen extends Component{
         }else{
             var params = {
                 name:  this.state.name,
-                birthday: this.state.date,
+                birthday: this.showDateFormat(),
                 zipcode: this.state.zipcode,
                 gender: this.state.gender,
                 marital: this.state.marital,
@@ -213,6 +225,29 @@ class EditProfileScreen extends Component{
         });
     }
 
+    onCancel(){
+        this.setState({
+            showDatePicker: false
+        });
+    }
+
+    onDone(date){
+        this.setState({
+            date: new Date(date),
+            showDatePicker: false
+        });
+    }
+
+    onDatePicker(){
+        this.setState({
+            showDatePicker: true
+        });
+    }
+
+    showDateFormat(){
+        return this.state.date.getFullYear() + "-" + (this.state.date.getMonth() < 9? ("0" + (this.state.date.getMonth() + 1)):(this.state.date.getMonth()+ 1)) + "-" + (this.state.date.getDate() < 9? ("0" + (this.state.date.getDate())): (this.state.date.getDate()));
+    }
+
     onChangeText(field, text){
         switch(field){
             case "name":
@@ -246,147 +281,217 @@ class EditProfileScreen extends Component{
     }
 
     render(){
-        StatusBar.setBarStyle('light-content');
+        StatusBar.setBarStyle('dark-content');
         return (
             <Container style={styles.container}>
                 <Header style={styles.header}>
                     <Left>
-                        <Button transparent style={styles.headerLeftBtn} onPress={() => this.onBack()}>
-                            <Icon name="close" style={styles.headerIcon}/>
+                        <Button transparent onPress={() => this.onBack()}>
+                            <Thumbnail square source={require('../../assets/icNavBackBlack1.png')} style={styles.backBtnIcon}/>
                         </Button>
                     </Left>
                     <Right>
-                        <Button transparent style={styles.headerRightBtn} onPress={() => this.onSave()}>
-                            <Icon name="checkmark" style={styles.headerIcon}/>
+                        <Button transparent onPress={() => this.onSave()}>
+                            <Text style={styles.saveBtnText}>Save</Text>
                         </Button>
                     </Right>
                 </Header>
                 {this.state.isError?
                 <EDialog errorText={this.state.errorText} onClose={() => this.onErrorClose()}/>:null}
                 <Content style={styles.content}>
-                    <Thumbnail square source={require('../../assets/1.png')} style={styles.image}/>
-                    <Text style={styles.basicTitle}>Private details</Text>
+                    <Body>
+                        <Thumbnail source={require('../../assets/home/1.png')} style={styles.image}/>
+                        <Text  onPress={() => alert("change photo")} style={styles.changeText}>Change photo</Text>
+                    </Body>
+                    <Text style={styles.detailText}>
+                        Private details
+                    </Text>
                     <Form style={styles.form}>
                         <Item stackedLabel style={styles.formItem}>
-                            <Label style={styles.formItemLabel}>YOUR NAME</Label>
-                            <Input style={styles.formItemInput} value={this.state.name} onChangeText={(text) => this.onChangeText("name", text)}/>
+                            <Label style={styles.formLabel}>YOUR NAME</Label>
+                            <Input style={styles.formInput} value={this.state.name} onChangeText={(text) => this.onChangeText("name", text)}/>
                         </Item>
                         <Grid>
-                            <Col style={styles.birthContainer}>
+                            <Col style={styles.birthdayContainer}>
                                 <Item stackedLabel style={styles.formItem}>
-                                    <Label style={styles.formItemLabel}>BIRTHDAY</Label>
-                                    <View style={styles.birthdayWrapper}>
-                                    <DatePicker 
-                                        style={{width: 200}}
-                                        date={this.state.date}
-                                        mode="date"
-                                        placeholder="Select your birthday"
-                                        format="YYYY-MM-DD"
-                                        confirmBtnText="Done"
-                                        cancelBtnText="Cancel"
-                                        onDateChange={(date) => this.setState({date: date})}
-                                        showIcon={false}
-                                        customStyles={{
-                                            dateInput: styles.birthText,
-                                            dateText: {
-                                                color: 'black',
-                                                fontFamily: 'Roboto',
-                                                fontWeight: 'normal',
-                                                fontSize: 16,
-                                                lineHeight: 35
-                                            }
-                                        }}
-                                        />
-                                    </View>
+                                    <Label style={styles.formLabel}>BIRTHDAY</Label>
+                                    <Text  onPress={() => this.onDatePicker()} style={[styles.formInput,{ width: width/2 -28, lineHeight: 48}]}>{this.showDateFormat()}</Text>
                                 </Item>
                             </Col>
-                            <Col style={styles.zipContainer}>
+                            <Col style={styles.zipcodeContainer}>
                                 <Item stackedLabel style={styles.formItem}>
-                                    <Label style={styles.formItemLabel}>ZIP CODE</Label>
-                                    <Input style={styles.formItemInput} keyboardType="numeric" maxLength={5} value={this.state.zipcode} onChangeText={(text) => this.onChangeText('zipcode', text)}/>
+                                    <Label style={styles.formLabel}>ZIP CODE</Label>
+                                    <Input style={styles.formInput} keyboardType="numeric" maxLength={5} value={this.state.zipcode} onChangeText={(text) => this.onChangeText('zipcode', text)}/>
                                 </Item>
                             </Col>
                         </Grid>
                     </Form>
-                    <View style={styles.additionalContainer}>
-                        <View style={styles.additionalItem}>
-                            <Text style={styles.additionalItemText}>GENDER</Text>
-                            <View style={styles.additionBtnContainer}>
-                                <Button transparent style={styles.additionalBtn} onPress={() => this.toggleGender(true)}>
+                    <List style={styles.list}>
+                        <ListItem style={styles.listItem}>
+                            <Body>
+                                <Text style={styles.listItemText}>GENDER</Text>
+                            </Body>
+                            <Right style={styles.listItemRight}>
+                                <Button transparent style={styles.rightBtn} onPress={() => this.toggleGender(true)}>
                                     {this.state.gender?
-                                    <Thumbnail square source={require('../../assets/femaleSelected.png')} style={styles.additionalBtnIcon}/>:
-                                    <Thumbnail square source={require('../../assets/femaleNormalLight.png')} style={styles.additionalBtnIcon}/>
+                                    <Thumbnail square source={require('../../assets/profile/femaleSelected.png')} style={styles.manIcon}/>:
+                                    <Thumbnail square source={require('../../assets/profile/femaleNormalLight.png')} style={styles.manIcon}/>
                                     }
                                 </Button>
-                                <Button transparent style={styles.additionalBtn} onPress={() => this.toggleGender(false)}>
+                            </Right>
+                            <Right style={styles.listItemRight}>
+                                <Button transparent style={styles.rightBtn} onPress={() => this.toggleGender(false)}>
                                     {this.state.gender?
-                                    <Thumbnail square source={require('../../assets/maleNormalLight.png')} style={styles.additionalBtnIcon}/>:
-                                    <Thumbnail square source={require('../../assets/maleSelected.png')} style={styles.additionalBtnIcon}/>
+                                    <Thumbnail square source={require('../../assets/profile/maleNormalLight.png')} style={styles.manIcon}/>:
+                                    <Thumbnail square source={require('../../assets/profile/maleSelected.png')} style={styles.manIcon}/>
                                     }
                                 </Button>
-                            </View>
-                        </View>
-                        <View style={styles.additionalItem}>
-                            <Text style={styles.additionalItemText}>MARITAL STATUS</Text>
-                            <View style={styles.additionBtnContainer}>
-                                <Button transparent style={styles.additionalBtn} onPress={() => this.toggleMarital(true)}>
+                            </Right>
+                        </ListItem>
+                        <ListItem style={styles.listItem}>
+                            <Body>
+                                <Text style={styles.listItemText}>MARITAL STATUS</Text>
+                            </Body>
+                            <Right style={styles.listItemRight}>
+                                <Button transparent style={styles.rightBtn} onPress={() => this.toggleMarital(true)}>
                                     {this.state.marital?
-                                    <Thumbnail square source={require('../../assets/marriedSelected.png')} style={styles.additionalBtnIcon}/>:
-                                    <Thumbnail square source={require('../../assets/marriedNormalLight.png')} style={styles.additionalBtnIcon}/>
+                                    <Thumbnail square source={require('../../assets/profile/marriedSelected.png')} style={styles.manIcon}/>:
+                                    <Thumbnail square source={require('../../assets/profile/marriedNormalLight.png')} style={styles.manIcon}/>
                                     }
                                 </Button>
-                                <Button transparent style={styles.additionalBtn} onPress={() => this.toggleMarital(false)}>
+                            </Right>
+                            <Right style={styles.listItemRight}>
+                                <Button transparent style={styles.rightBtn} onPress={() => this.toggleMarital(false)}>
                                     {this.state.marital?
-                                    <Thumbnail square source={require('../../assets/femaleNormalLight.png')} style={styles.additionalBtnIcon}/>:
-                                    <Thumbnail square source={require('../../assets/femaleSelected.png')} style={styles.additionalBtnIcon}/>
+                                    <Thumbnail square source={require('../../assets/profile/femaleNormalLight.png')} style={styles.manIcon}/>:
+                                    <Thumbnail square source={require('../../assets/profile/femaleSelected.png')} style={styles.manIcon}/>
                                     }
                                 </Button>
-                            </View>
-                        </View>
-                        <View style={styles.additionalItem}>
-                            <Text style={styles.additionalItemText}>DO YOU HAVE KIDS?</Text>
-                            <View style={styles.additionBtnContainer}>
-                                <Button transparent style={styles.additionalBtn} onPress={() => this.toggleKids(true)}>
+                            </Right>
+                        </ListItem>
+                        <ListItem style={styles.listItem}>
+                            <Body>
+                                <Text style={styles.listItemText}>DO YOU HAVE KIDS?</Text>
+                            </Body>
+                            <Right style={styles.listItemRight}>
+                                <Button transparent style={styles.rightBtn} onPress={() => this.toggleKids(true)}>
                                     {this.state.kids?
-                                    <Thumbnail square source={require('../../assets/yesSelected.png')} style={styles.additionalBtnIcon}/>:
-                                    <Thumbnail square source={require('../../assets/yesNormalLight.png')} style={styles.additionalBtnIcon}/>
+                                    <Thumbnail square source={require('../../assets/profile/yesSelected.png')} style={styles.manIcon}/>:
+                                    <Thumbnail square source={require('../../assets/profile/yesNormalLight.png')} style={styles.manIcon}/>
                                     }
                                 </Button>
-                                <Button transparent style={styles.additionalBtn} onPress={() => this.toggleKids(false)}>
-                                    {this.state.kids?
-                                    <Thumbnail square source={require('../../assets/noNormalLight.png')} style={styles.additionalBtnIcon}/>:
-                                    <Thumbnail square source={require('../../assets/noSelected.png')} style={styles.additionalBtnIcon}/>    
-                                    }
+                            </Right>
+                            <Right style={styles.listItemRight}>
+                                <Button transparent style={styles.rightBtn} onPress={() => this.toggleKids(false)}>
+                                        {this.state.kids?
+                                        <Thumbnail square source={require('../../assets/profile/noNormalLight.png')} style={styles.manIcon}/>:
+                                        <Thumbnail square source={require('../../assets/profile/noSelected.png')} style={styles.manIcon}/>
+                                        }
                                 </Button>
-                            </View>
-                        </View>
-                    </View>
+                            </Right>
+                        </ListItem>
+                    </List>
                     <Form style={styles.form}>
                         <Item stackedLabel style={styles.formItem}>
-                            <Label style={styles.formItemLabel}>EMAIL</Label>
-                            <Input style={styles.formItemInput} autoCapitalize={false} value={this.state.email} onChangeText={(text) => this.onChangeText('email', text)}/>
+                            <Label style={styles.formLabel}>EMAIL</Label>
+                            <Input style={styles.formInput} autoCapitalize={false} value={this.state.email} onChangeText={(text) => this.onChangeText('email', text)}/>
                         </Item>
                         <Item stackedLabel style={styles.formItem}>
-                            <Label style={styles.formItemLabel}>PHONE</Label>
-                            <Input style={styles.formItemInput} keyboardType="numeric" value={this.state.phone} onChangeText={(text) => this.onChangeText('phone', text)}/>
+                            <Label style={styles.formLabel}>PHONE</Label>
+                            <Input style={styles.formInput} keyboardType="numeric" value={this.state.phone} onChangeText={(text) => this.onChangeText('phone', text)}/>
                         </Item>
                     </Form>
-                    <Text style={styles.basicTitle}>My interests</Text>
-                    <View style={styles.checkContainer}>
-                        {this.props.interests.map((interest, index) => {
-                            return (
-                                <View style={styles.checkItemContainer} kye={index}>
-                                    <ListItem style={styles.checkItem}>
-                                        <CheckBox checked={this.state.interests[index]} onPress={() => this.onValueChange(index)}/>
-                                        <Body>
-                                            <Text style={styles.checkItemText}>{interest.name}</Text>
-                                        </Body>
-                                    </ListItem>
-                                </View>
-                            );
-                        })}
-                    </View>                                            
+                    <Text style={styles.interestText}>My interests</Text>
+                    {this.state.interestTemplates.length > 0?
+                    <Grid>
+                        <Row>
+                            <Col>
+                                <ListItem style={styles.checkListItem}>
+                                    <CheckBox checked={this.state.interests[0]} onPress={() => this.onValueChange(0)}/>
+                                    <Body>
+                                        <Text>Laser Tag</Text>
+                                    </Body>
+                                </ListItem>
+                            </Col>
+                            <Col>
+                                <ListItem style={styles.checkListItem}>
+                                    <CheckBox checked={this.state.interests[1]} onPress={() => this.onValueChange(1)}/>
+                                    <Body>
+                                        <Text>Arcade</Text>
+                                    </Body>
+                                </ListItem>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <ListItem style={styles.checkListItem}>
+                                    <CheckBox checked={this.state.interests[2]} onPress={() => this.onValueChange(2)} />
+                                    <Body>
+                                        <Text>Cosmic bowling</Text>
+                                    </Body>
+                                </ListItem>
+                            </Col>
+                            <Col>
+                                <ListItem style={styles.checkListItem}>
+                                    <CheckBox checked={this.state.interests[3]} onPress={() => this.onValueChange(3)}/>
+                                    <Body>
+                                        <Text>Kids party</Text>
+                                    </Body>
+                                </ListItem>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <ListItem style={styles.checkListItem}>
+                                    <CheckBox checked={this.state.interests[4]} onPress={() => this.onValueChange(4)}/>
+                                    <Body>
+                                        <Text>League</Text>
+                                    </Body>
+                                </ListItem>
+                            </Col>
+                            <Col>
+                                <ListItem style={styles.checkListItem}>
+                                    <CheckBox checked={this.state.interests[5]} onPress={() => this.onValueChange(5)}/>
+                                    <Body>
+                                        <Text>Bowling</Text>
+                                    </Body>
+                                </ListItem>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <ListItem style={styles.checkListItem}>
+                                    <CheckBox checked={this.state.interests[6]} onPress={() => this.onValueChange(6)}/>
+                                    <Body>
+                                        <Text>Group event</Text>
+                                    </Body>
+                                </ListItem>
+                            </Col>
+                            <Col>
+                                <ListItem style={styles.checkListItem}>
+                                    <CheckBox checked={this.state.interests[7]} onPress={() => this.onValueChange(7)}/>
+                                    <Body>
+                                        <Text>Adult party</Text>
+                                    </Body>
+                                </ListItem>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <ListItem style={styles.checkListItem}>
+                                    <CheckBox checked={this.state.interests[8]} onPress={() => this.onValueChange(8)} />
+                                    <Body>
+                                        <Text>Food</Text>
+                                    </Body>
+                                </ListItem>
+                            </Col>
+                        </Row>
+                    </Grid>: null}
+                    <View style={{height: 44}}/>
                 </Content>
+                {this.state.showDatePicker?
+                <PDatePicker date={this.state.date}  onCancel={() => this.onCancel()} onDone={(date) => this.onDone(date)}/> : null
+                }
                 {this.state.isLoading?<PLoading color="white"/>:null}
             </Container>
         );
@@ -394,8 +499,7 @@ class EditProfileScreen extends Component{
 }
 
 const mapStateToProps = state => ({
-    user: state.user,
-    interests: state.interest.list
+    user: state.user
 });
 
 export default connect(mapStateToProps)(EditProfileScreen);

@@ -1,5 +1,5 @@
 import { Dimensions } from 'react-native';
-const { width, height } = Dimensions.get('window');
+const { width, height }  = Dimensions.get('window');
 import { Colors } from '../../constants';
 
 export default {
@@ -9,108 +9,101 @@ export default {
 
     header: {
         backgroundColor: 'transparent',
-        elevation: 0
+        borderBottomWidth: 0
     },
 
-    headerIcon: {
-        color: 'white'
+    backBtnIcon: {
+        width: 25,
+        height: 25
     },
 
-    headerBtnText: {
-        color: 'white',
-        fontFamily: 'Roboto',
-        fontWeight: 'normal'
+    signupBtnText: {
+        fontSize: 17,
+        color: '#fff',
+        fontFamily: 'SanFranciscoText-Regular'
     },
 
-    title: {
-        color: 'white',
-        fontFamily: 'Roboto',
-        fontWeight: 'medium',
-        fontSize: 20,
-        lineHeight: 28
+    content: {
+        paddingLeft: 32,
+        paddingRight: 32
     },
 
-    text: {
-        fontFamily: 'Roboto',
-        fontWeight: 'medium',
-        fontSize: 18,
+    loginText: {
+        marginTop: 24,
         textAlign: 'center',
-        color: 'white',
-        marginTop: 20
-    },
-
-    formContainer: {
-        marginTop: 32,
-        marginLeft: 16,
-        marginRight: 16
-    },
-
-    formItemContainer: {
-        marginLeft: 0
-    },
-
-    formItemLabel: {
-        fontFamily: 'Roboto',
-        fontWeight: 'normal',
-        fontSize: 12,
-        color: 'white',
-        paddingTop: 0,
-        paddingBottom: 0,
-        paddingLeft: 0,
-        paddingRight: 0,
-        top: 0,
-        opacity: 0.65
-    },
-
-    formInput: {
-        height: 45,
-        paddingRight: 0,
-        fontFamily: 'Roboto',
-        fontWeight: 'normal',
-        fontSize: 16,
-        color: 'white'
+        fontSize: 28,
+        color: '#fff',
+        fontFamily: 'SanFranciscoText-Bold'
     },
 
     descText: {
-        marginLeft: 16,
-        marginRight: 16,
-        marginTop: 32,
-        fontFamily: 'Roboto',
-        fontWeight: 'normal',
-        fontSize: 12,
-        color: 'white',
-        textAlign: 'center'
+        marginTop: 8,
+        textAlign: 'center',
+        fontSize: 17,
+        color: '#fff',
+        fontFamily: 'SanFranciscoText-Regular'
     },
 
-    linkText: {
-        fontFamily: 'Roboto',
-        fontWeight: 'normal',
-        fontSize: 12,
-        color: '#fd9847',
-        textAlign: 'center'
-    },
-
-    sendBtn: {
-        marginLeft: 24,
-        marginRight: 24,
-        width: width -  48,
-        height: 48,
-        backgroundColor: '#e636a6',
-        borderRadius: 100,
-        alignItems: 'center',
-        justifyContent: 'center',
-        paddingLeft: 0,
-        paddingRight: 0,
-        paddingTop: 0,
-        paddingBottom: 0,
+    form: {
         marginTop: 32
     },
 
-    sendBtnText: {
-        fontFamily: 'Roboto',
-        fontWeight: 'medium',
-        fontSize: 18,
-        color: 'white'
-    }
+    formItem: {
+        marginLeft: 0,
+        marginBottom: 16,
+        borderBottomWidth: 1,
+        borderBottomColor: 'rgba(255,255,255,0.5)',
+        position: 'relative'
+    },
 
+    formLabel: {
+        paddingTop: 0,
+        marginBottom: 8,
+        fontSize: 14,
+        fontFamily: 'SanFranciscoText-Regular',
+        color: '#fff'
+    },
+
+    formInput: {
+        height: 48,
+        color: '#fff',
+        fontFamily: 'SanFranciscoText-Regular'
+    },
+
+    forgotBtn: {
+        position: 'absolute',
+        right: 0,
+        top: 0,
+        fontFamily: 'SanFranciscoText-Regular',
+        fontSize: 14,
+        color: 'rgb(255,169,88)'
+    },
+
+    loginBtn: {
+        marginTop: 36,
+        height: 57,
+        borderRadius: 100,
+        backgroundColor: 'rgb(230,54,166)',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+
+    loginBtnText: {
+        color: '#fff',
+        fontSize: 20,
+        fontFamily: 'SanFranciscoText-Medium'
+    },
+
+    descText2: {
+        fontSize: 13,
+        color: '#fff',
+        fontFamily: 'SanFranciscoText-Regular',
+        textAlign: 'center'
+    },
+
+    learnMoreBtn: {
+        color: 'rgb(253,152,71)',
+        fontFamily: 'SanFranciscoText-Medium',
+        fontSize: 13
+    }
 }
